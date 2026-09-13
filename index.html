@@ -1,1 +1,994 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<link rel="manifest" href="manifest.json">
+<title>Koma Star</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;color:#fff;
+  padding-bottom:75px
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0}
+.header{
+  position:sticky;top:0;z-index:20;
+  height:62px;background:#0d0d0d;
+  display:flex;align-items:center;
+  padding:0 15px;gap:12px;
+  border-bottom:1px solid #222
+}
+.logo{font-size:22px;font-weight:900;color:#fff}
+.logo span{color:#e50914}
+.search{
+  flex:1;background:#191919;border:1px solid #292929;
+  color:#fff;border-radius:20px;padding:9px 14px;
+  outline:none
+}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;
+  background:#191919;color:#fff
+}
+.page{display:none;padding:16px}
+.page.active{display:block}
+.hero{
+  min-height:270px;border-radius:20px;
+  padding:25px;display:flex;align-items:end;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#29100d,#111 55%,#311b00);
+  margin-bottom:22px
+}
+.hero:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.15));
+}
+.hero-content{position:relative;z-index:2;max-width:600px}
+.hero h1{font-size:34px;margin:8px 0}
+.hero p{color:#ccc;line-height:1.5}
+.badge{
+  display:inline-block;background:#e50914;
+  padding:5px 9px;border-radius:6px;
+  font-size:12px;font-weight:bold
+}
+.btn{
+  padding:10px 16px;border-radius:8px;
+  margin:12px 6px 0 0;background:#fff;color:#000;
+  font-weight:bold
+}
+.btn.red{background:#e50914;color:#fff}
+.btn.dark{background:#222;color:#fff}
+.section{margin:25px 0}
+.section-title{
+  font-size:20px;font-weight:bold;margin-bottom:13px
+}
+.row{
+  display:flex;gap:12px;overflow-x:auto;
+  padding-bottom:8px
+}
+.row::-webkit-scrollbar{height:4px}
+.row::-webkit-scrollbar-thumb{background:#444;border-radius:5px}
+.card{
+  min-width:145px;background:#121212;
+  border-radius:12px;overflow:hidden;
+  border:1px solid #222
+}
+.poster{
+  height:190px;
+  display:flex;align-items:end;padding:10px;
+  background:linear-gradient(135deg,#24110f,#50321a,#121212);
+  position:relative
+}
+.poster:nth-child(3n){background:linear-gradient(135deg,#101c30,#2e2348,#111)}
+.poster:nth-child(4n){background:linear-gradient(135deg,#173025,#45230f,#111)}
+.poster-title{
+  font-weight:900;font-size:17px;
+  text-shadow:0 2px 7px #000
+}
+.card-body{padding:10px}
+.card-body h3{font-size:14px;margin-bottom:5px}
+.muted{font-size:12px;color:#999}
+.card button{margin-top:8px;width:100%}
+.top-card{position:relative}
+.rank{
+  position:absolute;left:8px;top:8px;
+  font-size:30px;font-weight:900;
+  text-shadow:0 2px 8px #000
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:13px
+}
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:15px}
+.chip{
+  background:#1a1a1a;color:#ddd;
+  border:1px solid #333;padding:8px 13px;
+  border-radius:20px;white-space:nowrap
+}
+.chip.active{background:#e50914;color:#fff;border-color:#e50914}
+.bottom{
+  position:fixed;bottom:0;left:0;right:0;height:68px;
+  background:#0d0d0d;border-top:1px solid #292929;
+  display:flex;justify-content:space-around;
+  align-items:center;z-index:50
+}
+.nav{
+  background:none;color:#888;font-size:11px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:4px
+}
+.nav.active{color:#fff}
+.nav b{font-size:20px}
+.panel{
+  background:#121212;border:1px solid #292929;
+  border-radius:14px;padding:15px;margin-bottom:13px
+}
+.profile-head{
+  display:flex;align-items:center;gap:15px
+}
+.avatar{
+  width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,#e50914,#7d0000);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:bold
+}
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin:15px 0
+}
+.stat{background:#191919;padding:13px;text-align:center;border-radius:10px}
+.stat b{display:block;font-size:20px}
+.menu{
+  padding:14px;background:#171717;
+  border-radius:10px;margin:7px 0
+}
+.menu:hover{background:#222}
+.modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.82);z-index:100;
+  align-items:center;justify-content:center;
+  padding:15px
+}
+.modal.show{display:flex}
+.modal-box{
+  width:100%;max-width:650px;
+  max-height:90vh;overflow:auto;
+  background:#111;border:1px solid #333;
+  border-radius:18px;padding:20px
+}
+.close{
+  float:right;background:#222;color:#fff;
+  width:35px;height:35px;border-radius:50%
+}
+.modal h2{margin-bottom:10px}
+.modal p{color:#bbb;line-height:1.5;margin:8px 0}
+.form input,.form select,.form textarea{
+  width:100%;padding:12px;margin:7px 0;
+  background:#1a1a1a;border:1px solid #333;
+  color:#fff;border-radius:8px;outline:none
+}
+.video{
+  width:100%;border-radius:12px;
+  background:#000;margin-top:12px
+}
+.progress{
+  height:6px;background:#333;border-radius:5px;
+  overflow:hidden;margin:10px 0
+}
+.progress span{display:block;height:100%;background:#e50914}
+.live{
+  color:#ff3333;font-weight:bold;
+  animation:pulse 1.5s infinite
+}
+@keyframes pulse{50%{opacity:.45}}
+.toast{
+  position:fixed;bottom:85px;left:50%;
+  transform:translateX(-50%);
+  background:#fff;color:#000;
+  padding:11px 18px;border-radius:25px;
+  display:none;z-index:200;font-weight:bold
+}
+.toast.show{display:block}
+.chat{
+  height:180px;overflow:auto;
+  background:#090909;border-radius:10px;
+  padding:10px;margin:10px 0
+}
+.chat div{padding:5px 0;color:#bbb}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{
+  padding:9px;border-bottom:1px solid #292929;
+  text-align:left;font-size:13px
+}
+.empty{
+  padding:35px;text-align:center;color:#777;
+  background:#111;border-radius:14px
+}
+.vip{
+  background:linear-gradient(135deg,#3a2400,#17120a);
+  border:1px solid #775b17
+}
+@media(min-width:800px){
+  .page{max-width:1200px;margin:auto}
+  .bottom{width:700px;left:50%;transform:translateX(-50%);border-radius:18px 18px 0 0}
+  .hero{min-height:360px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">Koma <span>Star</span></div>
+  <input id="globalSearch" class="search" placeholder="Search movies, series, reality..." oninput="superSearch(this.value)">
+  <button class="icon-btn" onclick="openPage('notifications')">🔔</button>
+</header>
+
+<!-- HOME -->
+<main id="home" class="page active">
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <span class="badge">FEATURED</span>
+      <h1 id="heroTitle">The Last Mission</h1>
+      <p id="heroText">A thrilling original adventure from Koma Star.</p>
+      <button class="btn red" onclick="openDetails('The Last Mission')">▶ Watch Now</button>
+      <button class="btn dark" onclick="addList('The Last Mission')">＋ My List</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">🔥 Trending</div>
+    <div class="row" id="trending"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">🏆 Top 10</div>
+    <div class="row" id="top10"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">🆕 New Releases</div>
+    <div class="row" id="newReleases"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">✨ Recommended For You</div>
+    <div class="row" id="recommended"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">▶ Continue Watching</div>
+    <div class="row" id="continueWatching"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Recently Added</div>
+    <div class="row" id="recent"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Quick Access</div>
+    <div class="grid">
+      <button class="btn dark" onclick="openPage('movies')">🎬 Movies</button>
+      <button class="btn dark" onclick="openPage('series')">📺 Series</button>
+      <button class="btn dark" onclick="openPage('reality')">🎭 Reality</button>
+      <button class="btn dark" onclick="openPage('tv')">📡 Live TV</button>
+    </div>
+  </section>
+</main>
+
+<!-- MOVIES -->
+<main id="movies" class="page">
+  <h2>🎬 Movies</h2><br>
+  <input class="search" id="movieSearch" placeholder="Search movies..." oninput="renderMovies()">
+  <br><br>
+  <div class="chips">
+    <button class="chip active" onclick="movieGenre='All';renderMovies()">All</button>
+    <button class="chip" onclick="movieGenre='Action';renderMovies()">Action</button>
+    <button class="chip" onclick="movieGenre='Drama';renderMovies()">Drama</button>
+    <button class="chip" onclick="movieGenre='Comedy';renderMovies()">Comedy</button>
+    <button class="chip" onclick="movieGenre='Sci-Fi';renderMovies()">Sci-Fi</button>
+  </div>
+  <div class="grid" id="movieGrid"></div>
+</main>
+
+<!-- SERIES -->
+<main id="series" class="page">
+  <h2>📺 Web Series</h2><br>
+  <input class="search" id="seriesSearch" placeholder="Search series..." oninput="renderSeries()">
+  <br><br>
+  <div class="grid" id="seriesGrid"></div>
+</main>
+
+<!-- REALITY -->
+<main id="reality" class="page">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">LIVE REALITY</span>
+      <h1>The House 50</h1>
+      <p>50 contestants. One house. One winner.</p>
+      <button class="btn red" onclick="openDetails('The House 50')">Enter Show</button>
+    </div>
+  </section>
+
+  <h2>🎭 Reality Shows</h2><br>
+  <div class="grid" id="realityGrid"></div>
+
+  <section class="section">
+    <h2>👥 Contestants</h2><br>
+    <div class="grid">
+      <div class="panel"><h3>Arjun</h3><p class="muted">Contestant #01</p><button class="btn dark" onclick="contestant('Arjun')">Profile</button></div>
+      <div class="panel"><h3>Riya</h3><p class="muted">Contestant #02</p><button class="btn dark" onclick="contestant('Riya')">Profile</button></div>
+      <div class="panel"><h3>Sohan</h3><p class="muted">Contestant #03</p><button class="btn dark" onclick="contestant('Sohan')">Profile</button></div>
+      <div class="panel"><h3>Maya</h3><p class="muted">Contestant #04</p><button class="btn dark" onclick="contestant('Maya')">Profile</button></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>🗳️ Voting</h2>
+      <p>Choose your favourite contestant.</p>
+      <select id="voteSelect" class="search">
+        <option>Arjun</option><option>Riya</option>
+        <option>Sohan</option><option>Maya</option>
+      </select>
+      <button class="btn red" onclick="vote()">Submit Vote</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>🏆 Leaderboard</h2>
+      <div id="leaderboard"></div>
+    </div>
+  </section>
+</main>
+
+<!-- TV -->
+<main id="tv" class="page">
+  <h2>📡 Live TV</h2><br>
+  <div class="grid" id="tvGrid"></div>
+
+  <section class="section">
+    <div class="panel">
+      <h2>📅 Live Schedule</h2>
+      <table class="table">
+        <tr><th>Time</th><th>Channel</th><th>Program</th></tr>
+        <tr><td>20:00</td><td>Koma News</td><td>Prime News</td></tr>
+        <tr><td>21:00</td><td>Koma Music</td><td>Music Hour</td></tr>
+        <tr><td>22:00</td><td>Koma Sports</td><td>Sports Live</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <h2>💬 Live Chat</h2>
+      <div class="chat" id="chat">
+        <div><b>User01:</b> Amazing show!</div>
+        <div><b>Fan:</b> Koma Star 🔥</div>
+        <div><b>Viewer:</b> Watching live!</div>
+      </div>
+      <input class="search" id="chatInput" placeholder="Write a message...">
+      <button class="btn red" onclick="sendChat()">Send</button>
+    </div>
+  </section>
+</main>
+
+<!-- MY LIST -->
+<main id="mylist" class="page">
+  <h2>❤️ My List</h2><br>
+  <div class="grid" id="listGrid"></div>
+</main>
+
+<!-- DOWNLOADS -->
+<main id="downloads" class="page">
+  <h2>⬇️ Download Center</h2><br>
+  <div class="panel">
+    <p>Demo storage</p>
+    <div class="progress"><span style="width:35%"></span></div>
+    <p class="muted">350 MB / 1 GB</p>
+  </div>
+  <div class="grid" id="downloadGrid"></div>
+</main>
+
+<!-- HISTORY -->
+<main id="history" class="page">
+  <h2>🕘 Watch History</h2><br>
+  <button class="btn red" onclick="clearHistory()">Clear History</button>
+  <br><br>
+  <div class="grid" id="historyGrid"></div>
+</main>
+
+<!-- PROFILE -->
+<main id="profile" class="page">
+  <div class="panel">
+    <div class="profile-head">
+      <div class="avatar" id="avatar">K</div>
+      <div>
+        <h2 id="profileName">Koma User</h2>
+        <p class="muted" id="profileEmail">user@komastar.demo</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="watchedStat">0</b>Watched</div>
+      <div class="stat"><b id="listStat">0</b>My List</div>
+      <div class="stat"><b id="downloadStat">0</b>Downloads</div>
+    </div>
+
+    <button class="btn red" onclick="editProfile()">✏️ Edit Profile</button>
+    <button class="btn dark" onclick="openVIP()">⭐ Koma VIP</button>
+  </div>
+
+  <div class="panel">
+    <h3>👥 Profiles</h3><br>
+    <div id="profiles"></div>
+    <button class="btn dark" onclick="addProfile()">＋ Add Profile</button>
+  </div>
+
+  <div class="panel vip">
+    <h3>⭐ Koma VIP</h3>
+    <p>Current status: <b id="vipStatus">Free</b></p>
+    <button class="btn red" onclick="openVIP()">Upgrade ₹99/month</button>
+  </div>
+
+  <div class="panel">
+    <h3>Account Dashboard</h3>
+    <div class="menu" onclick="openPage('history')">🕘 Watch History</div>
+    <div class="menu" onclick="openPage('downloads')">⬇️ Downloads</div>
+    <div class="menu" onclick="openPage('mylist')">❤️ My List</div>
+    <div class="menu" onclick="openPage('notifications')">🔔 Notifications</div>
+    <div class="menu" onclick="openPage('settings')">⚙️ Settings</div>
+    <div class="menu" onclick="openPage('login')">🚪 Login / Logout</div>
+  </div>
+</main>
+
+<!-- NOTIFICATIONS -->
+<main id="notifications" class="page">
+  <h2>🔔 Notifications</h2><br>
+  <div class="panel"><b>🔥 New Release</b><p class="muted">Future World is now available.</p></div>
+  <div class="panel"><b>🎭 Reality</b><p class="muted">The House 50 voting is live.</p></div>
+  <div class="panel"><b>📡 Live TV</b><p class="muted">Koma News is live now.</p></div>
+</main>
+
+<!-- SETTINGS -->
+<main id="settings" class="page">
+  <h2>⚙️ Settings</h2><br>
+  <div class="panel">
+    <h3>Language</h3><br>
+    <select class="search" id="language" onchange="saveLanguage()">
+      <option>English</option>
+      <option>Hindi</option>
+      <option>বাংলা</option>
+    </select>
+  </div>
+
+  <div class="panel">
+    <h3>🔐 PIN Lock</h3>
+    <input class="search" id="pin" type="password" placeholder="Create 4-digit PIN">
+    <button class="btn red" onclick="savePIN()">Save PIN</button>
+  </div>
+
+  <div class="panel">
+    <h3>🔔 Notifications</h3>
+    <button class="btn dark" onclick="toast('Notifications setting updated')">Enable / Disable</button>
+  </div>
+
+  <div class="panel">
+    <h3>🗑️ Demo Data</h3>
+    <button class="btn red" onclick="clearDemo()">Clear Demo Data</button>
+  </div>
+</main>
+
+<!-- LOGIN -->
+<main id="login" class="page">
+  <div class="panel form">
+    <h2>🔐 Koma Star Login</h2>
+    <input id="loginName" placeholder="Name">
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button class="btn red" onclick="login()">Login / Sign Up</button>
+    <p class="muted">Demo frontend login. Real authentication requires backend.</p>
+  </div>
+</main>
+
+<!-- DETAILS MODAL -->
+<div class="modal" id="detailsModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('detailsModal')">×</button>
+    <div id="detailsContent"></div>
+  </div>
+</div>
+
+<!-- PLAYER -->
+<div class="modal" id="playerModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('playerModal')">×</button>
+    <h2 id="playerTitle">Koma Star Player</h2>
+    <video class="video" id="video" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="progress"><span id="playerProgress" style="width:0%"></span></div>
+    <button class="btn dark" onclick="nextEpisode()">Next Episode →</button>
+    <h3 style="margin-top:18px">Up Next</h3>
+    <div id="upNext"></div>
+  </div>
+</div>
+
+<!-- VIP -->
+<div class="modal" id="vipModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('vipModal')">×</button>
+    <h2>⭐ Koma VIP</h2>
+    <p>Premium entertainment experience.</p>
+    <div class="panel vip">
+      <h3>₹99 / Month</h3>
+      <p>Premium UI demo</p>
+      <p>✔ Premium badge</p>
+      <p>✔ Demo premium content</p>
+      <p>✔ VIP profile status</p>
+      <button class="btn red" onclick="activateVIP()">Activate Demo VIP</button>
+    </div>
+    <p class="muted">Real payment requires a secure payment gateway and backend.</p>
+  </div>
+</div>
+
+<!-- CONTESTANT -->
+<div class="modal" id="contestantModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('contestantModal')">×</button>
+    <div id="contestantContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<nav class="bottom">
+  <button class="nav active" onclick="openPage('home',this)"><b>⌂</b>Home</button>
+  <button class="nav" onclick="openPage('movies',this)"><b>🎬</b>Movies</button>
+  <button class="nav" onclick="openPage('series',this)"><b>📺</b>Series</button>
+  <button class="nav" onclick="openPage('reality',this)"><b>🎭</b>Reality</button>
+  <button class="nav" onclick="openPage('tv',this)"><b>📡</b>TV</button>
+  <button class="nav" onclick="openPage('profile',this)"><b>👤</b>Profile</button>
+</nav>
+
+<script>
+const content=[
+ {title:"The Last Mission",type:"Movie",genre:"Action",year:"2026",rating:"8.7",desc:"A team enters a dangerous final mission that changes everything.",director:"Koma Originals",cast:"Arjun, Maya"},
+ {title:"Dream City",type:"Movie",genre:"Drama",year:"2026",rating:"8.2",desc:"A young dreamer tries to build a new life in a giant city.",director:"Koma Studios",cast:"Riya, Sohan"},
+ {title:"Shadow Code",type:"Movie",genre:"Action",year:"2026",rating:"8.8",desc:"A mysterious code leads to an unexpected secret.",director:"Koma Originals",cast:"Arjun, Sohan"},
+ {title:"Campus Life",type:"Movie",genre:"Comedy",year:"2026",rating:"7.9",desc:"Friends, fun and unexpected adventures at college.",director:"Koma Studios",cast:"Riya, Maya"},
+ {title:"Future World",type:"Movie",genre:"Sci-Fi",year:"2026",rating:"9.0",desc:"A journey into a futuristic world where technology controls everything.",director:"Koma Originals",cast:"Arjun, Riya"},
+ {title:"Midnight Files",type:"Series",genre:"Drama",year:"2026",rating:"8.6",desc:"A mystery unfolds through a collection of midnight files.",director:"Koma Studios",cast:"Maya, Sohan"},
+ {title:"House of Stars",type:"Series",genre:"Reality",year:"2026",rating:"8.1",desc:"Stars compete in challenges and unexpected games.",director:"Koma Originals",cast:"Arjun, Riya"},
+ {title:"Star Challenge",type:"Series",genre:"Reality",year:"2026",rating:"8.4",desc:"Contestants face new challenges every week.",director:"Koma Studios",cast:"Maya, Sohan"},
+ {title:"The House 50",type:"Reality",genre:"Reality",year:"2026",rating:"9.2",desc:"50 contestants enter one house to compete for the grand prize.",director:"Koma Star",cast:"50 Contestants"},
+ {title:"Koma News",type:"TV",genre:"News",year:"Live",rating:"Live",desc:"Koma Star's demo news channel.",director:"Koma Star",cast:"News Team"},
+ {title:"Koma Music",type:"TV",genre:"Music",year:"Live",rating:"Live",desc:"Music and entertainment all day.",director:"Koma Star",cast:"Music Team"},
+ {title:"Koma Sports",type:"TV",genre:"Sports",year:"Live",rating:"Live",desc:"Sports coverage and updates.",director:"Koma Star",cast:"Sports Team"}
+];
+
+let movieGenre="All";
+let list=JSON.parse(localStorage.getItem("komaList")||"[]");
+let history=JSON.parse(localStorage.getItem("komaHistory")||"[]");
+let downloads=JSON.parse(localStorage.getItem("komaDownloads")||"[]");
+let votes=JSON.parse(localStorage.getItem("komaVotes")||'{"Arjun":0,"Riya":0,"Sohan":0,"Maya":0}');
+let profiles=JSON.parse(localStorage.getItem("komaProfiles")||'[{"name":"Main","type":"Adult"},{"name":"Family","type":"Family"},{"name":"Kids","type":"Kids"}]');
+let user=JSON.parse(localStorage.getItem("komaUser")||'null');
+let vip=localStorage.getItem("komaVIP")==="true";
+
+const $=id=>document.getElementById(id);
+
+function save(){
+ localStorage.setItem("komaList",JSON.stringify(list));
+ localStorage.setItem("komaHistory",JSON.stringify(history));
+ localStorage.setItem("komaDownloads",JSON.stringify(downloads));
+ localStorage.setItem("komaVotes",JSON.stringify(votes));
+ localStorage.setItem("komaProfiles",JSON.stringify(profiles));
+ localStorage.setItem("komaVIP",vip);
+}
+
+function toast(msg){
+ $("toast").textContent=msg;
+ $("toast").classList.add("show");
+ setTimeout(()=>$("toast").classList.remove("show"),1800);
+}
+
+function openPage(id,el){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ $(id).classList.add("active");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ if(el)el.classList.add("active");
+ window.scrollTo(0,0);
+ renderAll();
+}
+
+function itemCard(x,rank=false){
+ return `<div class="card">
+   <div class="poster">
+   ${rank?`<div class="rank">${rank}</div>`:""}
+   <div class="poster-title">${x.title}</div>
+   </div>
+   <div class="card-body">
+     <h3>${x.title}</h3>
+     <div class="muted">${x.type} • ${x.genre}</div>
+     <div class="muted">⭐ ${x.rating}</div>
+     <button class="btn dark" onclick="openDetails('${x.title}')">Details</button>
+   </div>
+ </div>`;
+}
+
+function renderHome(){
+ $("trending").innerHTML=content.slice(0,6).map(x=>itemCard(x)).join("");
+ $("top10").innerHTML=content.slice(0,10).map((x,i)=>itemCard(x,i+1)).join("");
+ $("newReleases").innerHTML=content.slice(4,10).map(x=>itemCard(x)).join("");
+ $("recommended").innerHTML=content.slice(1,7).map(x=>itemCard(x)).join("");
+ $("recent").innerHTML=content.slice(6,12).map(x=>itemCard(x)).join("");
+
+ let cw=history.length
+   ?content.filter(x=>history.includes(x.title))
+   :content.slice(0,4);
+ $("continueWatching").innerHTML=cw.map(x=>itemCard(x)).join("");
+}
+
+function renderMovies(){
+ let q=($("movieSearch")?.value||"").toLowerCase();
+ let arr=content.filter(x=>x.type==="Movie")
+ .filter(x=>movieGenre==="All"||x.genre===movieGenre)
+ .filter(x=>x.title.toLowerCase().includes(q));
+ $("movieGrid").innerHTML=arr.length?arr.map(x=>itemCard(x)).join(""):`<div class="empty">No movies found</div>`;
+}
+
+function renderSeries(){
+ let q=($("seriesSearch")?.value||"").toLowerCase();
+ let arr=content.filter(x=>x.type==="Series")
+ .filter(x=>x.title.toLowerCase().includes(q));
+ $("seriesGrid").innerHTML=arr.map(x=>itemCard(x)).join("");
+}
+
+function renderReality(){
+ let arr=content.filter(x=>x.type==="Reality"||x.genre==="Reality");
+ $("realityGrid").innerHTML=arr.map(x=>itemCard(x)).join("");
+ renderLeaderboard();
+}
+
+function renderTV(){
+ let arr=content.filter(x=>x.type==="TV");
+ $("tvGrid").innerHTML=arr.map(x=>`
+ <div class="card">
+   <div class="poster"><div class="poster-title">🔴 LIVE<br>${x.title}</div></div>
+   <div class="card-body">
+    <h3>${x.title}</h3><p class="live">● LIVE NOW</p>
+    <button class="btn red" onclick="play('${x.title}')">Watch Live</button>
+   </div>
+ </div>`).join("");
+}
+
+function renderList(){
+ let arr=content.filter(x=>list.includes(x.title));
+ $("listGrid").innerHTML=arr.length?arr.map(x=>itemCard(x)).join(""):`<div class="empty">Your My List is empty.</div>`;
+}
+
+function renderDownloads(){
+ let arr=content.filter(x=>downloads.includes(x.title));
+ $("downloadGrid").innerHTML=arr.length?arr.map(x=>`
+ <div class="panel">
+  <h3>${x.title}</h3>
+  <p class="muted">${x.type} • Demo Download</p>
+  <button class="btn dark" onclick="removeDownload('${x.title}')">Remove</button>
+ </div>`).join(""):`<div class="empty">No downloads yet.</div>`;
+}
+
+function renderHistory(){
+ let arr=content.filter(x=>history.includes(x.title));
+ $("historyGrid").innerHTML=arr.length?arr.map(x=>itemCard(x)).join(""):`<div class="empty">No watch history.</div>`;
+}
+
+function renderProfile(){
+ let name=user?.name||"Koma User";
+ $("profileName").textContent=name;
+ $("profileEmail").textContent=user?.email||"user@komastar.demo";
+ $("avatar").textContent=name.charAt(0).toUpperCase();
+ $("watchedStat").textContent=history.length;
+ $("listStat").textContent=list.length;
+ $("downloadStat").textContent=downloads.length;
+ $("vipStatus").textContent=vip?"VIP":"Free";
+
+ $("profiles").innerHTML=profiles.map(p=>
+ `<div class="menu" onclick="selectProfile('${p.name}')">👤 ${p.name} <span class="muted">(${p.type})</span></div>`
+ ).join("");
+}
+
+function renderLeaderboard(){
+ let sorted=Object.entries(votes).sort((a,b)=>b[1]-a[1]);
+ $("leaderboard").innerHTML=sorted.map((v,i)=>
+ `<div class="menu">#${i+1} <b>${v[0]}</b> <span style="float:right">${v[1]} votes</span></div>`
+ ).join("");
+}
+
+function openDetails(title){
+ let x=content.find(a=>a.title===title);
+ if(!x)return;
+ let episodes=x.type==="Series"?`
+ <div class="panel">
+  <h3>Season 1</h3>
+  <p>Episode 1 — The Beginning</p>
+  <button class="btn dark" onclick="play('${x.title} - S1 E1')">▶ Watch</button>
+  <p>Episode 2 — The Secret</p>
+  <button class="btn dark" onclick="play('${x.title} - S1 E2')">▶ Watch</button>
+  <p>Episode 3 — New Path</p>
+  <button class="btn dark" onclick="play('${x.title} - S1 E3')">▶ Watch</button>
+ </div>
+ <div class="panel">
+  <h3>Season 2</h3>
+  <p>Episode 1 — New Chapter</p>
+  <button class="btn dark" onclick="play('${x.title} - S2 E1')">▶ Watch</button>
+  <p>Episode 2 — The Return</p>
+  <button class="btn dark" onclick="play('${x.title} - S2 E2')">▶ Watch</button>
+ </div>`:"";
+
+ let reality=x.type==="Reality"?`
+ <div class="panel">
+  <h3>🎭 Reality Hub</h3>
+  <p>🔴 Live Show • Episodes • Voting • Leaderboard</p>
+  <button class="btn red" onclick="openPage('reality');closeModal('detailsModal')">Open Reality Hub</button>
+ </div>`:"";
+
+ $("detailsContent").innerHTML=`
+ <div class="poster" style="height:240px;border-radius:14px">
+   <div class="poster-title">${x.title}</div>
+ </div>
+ <h2>${x.title}</h2>
+ <p>⭐ ${x.rating} • ${x.year} • ${x.genre}</p>
+ <p>${x.desc}</p>
+ <p><b>Director:</b> ${x.director}</p>
+ <p><b>Cast:</b> ${x.cast}</p>
+
+ <button class="btn red" onclick="play('${x.title}')">▶ Watch Now</button>
+ <button class="btn dark" onclick="addList('${x.title}')">❤️ My List</button>
+ <button class="btn dark" onclick="download('${x.title}')">⬇️ Download</button>
+ <button class="btn dark" onclick="toast('Trailer demo')">🎞 Trailer</button>
+
+ <div class="panel">
+  <h3>👍 Like / Dislike</h3>
+  <button class="btn dark" onclick="like('${x.title}')">👍 Like</button>
+  <button class="btn dark" onclick="like('${x.title}',false)">👎 Dislike</button>
+ </div>
+
+ <div class="panel">
+  <h3>⭐ Rating</h3>
+  <button class="btn dark" onclick="rate('${x.title}',5)">5 ⭐</button>
+  <button class="btn dark" onclick="rate('${x.title}',4)">4 ⭐</button>
+  <button class="btn dark" onclick="rate('${x.title}',3)">3 ⭐</button>
+ </div>
+
+ <div class="panel form">
+  <h3>💬 Review</h3>
+  <textarea id="review" placeholder="Write a review..."></textarea>
+  <button class="btn red" onclick="review('${x.title}')">Post Review</button>
+ </div>
+
+ ${episodes}${reality}
+
+ <div class="panel">
+  <h3>Similar Content</h3>
+  <p>${content.filter(a=>a.genre===x.genre&&a.title!==x.title).slice(0,3).map(a=>a.title).join(" • ")||"More coming soon"}</p>
+ </div>
+ `;
+ $("detailsModal").classList.add("show");
+}
+
+function closeModal(id){$(id).classList.remove("show")}
+
+function play(title){
+ if(!history.includes(title)){
+  history.unshift(title);
+  if(history.length>30)history.pop();
+ }
+ save();
+ $("playerTitle").textContent=title;
+ $("playerProgress").style.width=(localStorage.getItem("komaProgress_"+title)||"0")+"%";
+ $("playerModal").classList.add("show");
+ renderAll();
+}
+
+$("video").addEventListener("timeupdate",function(){
+ if(this.duration){
+  let p=(this.currentTime/this.duration)*100;
+  $("playerProgress").style.width=p+"%";
+  localStorage.setItem("komaProgress_"+$("playerTitle").textContent,Math.floor(p));
+ }
+});
+
+function nextEpisode(){
+ toast("Next episode demo");
+ $("playerTitle").textContent+=" • Next";
+}
+
+function addList(title){
+ if(!list.includes(title)){
+  list.push(title);save();toast("Added to My List");
+ }else toast("Already in My List");
+ renderAll();
+}
+
+function download(title){
+ if(!downloads.includes(title)){
+  downloads.push(title);save();toast("Download added to Download Center");
+ }else toast("Already downloaded");
+ renderAll();
+}
+
+function removeDownload(title){
+ downloads=downloads.filter(x=>x!==title);
+ save();renderAll();toast("Removed");
+}
+
+function clearHistory(){
+ history=[];save();renderAll();toast("History cleared");
+}
+
+function vote(){
+ let n=$("voteSelect").value;
+ votes[n]=(votes[n]||0)+1;
+ save();renderLeaderboard();toast("Vote submitted");
+}
+
+function contestant(name){
+ $("contestantContent").innerHTML=`
+ <div class="poster" style="height:230px;border-radius:15px">
+  <div class="poster-title">${name}</div>
+ </div>
+ <h2>${name}</h2>
+ <p>Contestant of The House 50.</p>
+ <p>⭐ Profile • Challenges • Voting</p>
+ <button class="btn red" onclick="closeModal('contestantModal')">Close</button>`;
+ $("contestantModal").classList.add("show");
+}
+
+function sendChat(){
+ let v=$("chatInput").value.trim();
+ if(!v)return;
+ $("chat").innerHTML+=`<div><b>You:</b> ${v}</div>`;
+ $("chatInput").value="";
+ $("chat").scrollTop=$("chat").scrollHeight;
+}
+
+function superSearch(q){
+ q=q.toLowerCase().trim();
+ if(q.length<2)return;
+ let result=content.filter(x=>x.title.toLowerCase().includes(q));
+ if(result.length){
+  toast(result.length+" result(s) found");
+ }
+}
+
+function editProfile(){
+ let n=prompt("Enter your name:",user?.name||"Koma User");
+ if(n){
+  user=user||{};
+  user.name=n;
+  user.email=user.email||"user@komastar.demo";
+  localStorage.setItem("komaUser",JSON.stringify(user));
+  renderProfile();toast("Profile updated");
+ }
+}
+
+function login(){
+ let name=$("loginName").value.trim()||"Koma User";
+ let email=$("loginEmail").value.trim()||"user@komastar.demo";
+ user={name,email};
+ localStorage.setItem("komaUser",JSON.stringify(user));
+ renderProfile();toast("Demo login successful");
+ openPage("profile");
+}
+
+function addProfile(){
+ let n=prompt("Profile name:");
+ if(!n)return;
+ profiles.push({name:n,type:"Personal"});
+ save();renderProfile();toast("Profile added");
+}
+
+function selectProfile(name){
+ localStorage.setItem("komaCurrentProfile",name);
+ toast("Profile switched to "+name);
+}
+
+function openVIP(){
+ $("vipModal").classList.add("show");
+}
+
+function activateVIP(){
+ vip=true;save();
+ closeModal("vipModal");
+ renderProfile();
+ toast("Demo VIP activated");
+}
+
+function saveLanguage(){
+ localStorage.setItem("komaLanguage",$("language").value);
+ toast("Language saved");
+}
+
+function savePIN(){
+ let p=$("pin").value;
+ if(!/^[0-9]{4}$/.test(p)){
+  toast("Enter a 4-digit PIN");return;
+ }
+ localStorage.setItem("komaPIN",p);
+ toast("PIN saved");
+}
+
+function like(title,positive=true){
+ let likes=JSON.parse(localStorage.getItem("komaLikes")||"{}");
+ likes[title]=positive?"like":"dislike";
+ localStorage.setItem("komaLikes",JSON.stringify(likes));
+ toast(positive?"Liked 👍":"Disliked 👎");
+}
+
+function rate(title,rating){
+ let reviews=JSON.parse(localStorage.getItem("komaReviews")||"{}");
+ reviews[title]=reviews[title]||{};
+ reviews[title].rating=rating;
+ localStorage.setItem("komaReviews",JSON.stringify(reviews));
+ toast("Rated "+rating+" stars");
+}
+
+function review(title){
+ let text=$("review").value.trim();
+ if(!text){toast("Write a review first");return}
+ let reviews=JSON.parse(localStorage.getItem("komaReviews")||"{}");
+ reviews[title]=reviews[title]||{};
+ reviews[title].text=text;
+ localStorage.setItem("komaReviews",JSON.stringify(reviews));
+ toast("Review saved");
+}
+
+function clearDemo(){
+ if(confirm("Clear Koma Star demo data?")){
+  localStorage.clear();
+  location.reload();
+ }
+}
+
+function renderAll(){
+ renderHome();
+ renderMovies();
+ renderSeries();
+ renderReality();
+ renderTV();
+ renderList();
+ renderDownloads();
+ renderHistory();
+ renderProfile();
+}
+
+const heroes=[
+ ["The Last Mission","A thrilling original adventure from Koma Star."],
+ ["Future World","Enter a new world of technology and mystery."],
+ ["The House 50","50 contestants. One house. One winner."]
+];
+let heroIndex=0;
+setInterval(()=>{
+ heroIndex=(heroIndex+1)%heroes.length;
+ $("heroTitle").textContent=heroes[heroIndex][0];
+ $("heroText").textContent=heroes[heroIndex][1];
+},5000);
+
+renderAll();
+
+if("serviceWorker" in navigator){
+ navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+</script>
+
+</body>
+</html>
