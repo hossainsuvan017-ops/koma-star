@@ -2,2747 +2,1952 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Koma Star Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koma Star Admin Panel</title>
 
-<script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-body{background:#050505;color:#fff;min-height:100vh}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-
-#loginPage{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
- background:radial-gradient(circle at top,#3b0610,#120307 35%,#050505 70%)
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-.loginBox{
- width:100%;
- max-width:420px;
- background:#111;
- border:1px solid #292929;
- border-radius:24px;
- padding:30px;
- box-shadow:0 20px 60px #000
+body{
+  background:#050505;
+  color:#fff;
+  min-height:100vh;
 }
 
-.logo{
- text-align:center;
- font-size:34px;
- font-weight:900;
- letter-spacing:2px
-}
-
-.logo span,.brand span{color:#ff1744}
-
-.subtitle{
- text-align:center;
- color:#999;
- margin:8px 0 28px
-}
-
-.field{margin-bottom:16px}
-
-.field label{
- display:block;
- color:#bbb;
- font-size:14px;
- margin-bottom:7px
-}
-
-.field input,
-.field textarea,
-.field select{
- width:100%;
- background:#191919;
- color:#fff;
- border:1px solid #333;
- border-radius:12px;
- padding:13px;
- outline:none
-}
-
-.field textarea{
- min-height:100px;
- resize:vertical
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
- border-color:#ff1744
-}
-
-.primaryBtn,
-.publishBtn{
- width:100%;
- border:0;
- border-radius:12px;
- padding:14px;
- color:#fff;
- font-weight:800;
- background:linear-gradient(135deg,#ff1744,#b00020)
-}
-
-.primaryBtn:disabled{
- opacity:.6;
- cursor:not-allowed
-}
-
-.error{
- color:#ff657f;
- font-size:14px;
- margin-top:12px;
- text-align:center;
- line-height:1.5
-}
-
-.success{
- color:#8cffae;
- font-size:14px;
- margin-top:12px;
- text-align:center
-}
-
-#adminPage{min-height:100vh}
-
-.topbar{
- position:sticky;
- top:0;
- z-index:10;
- height:70px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 22px;
- background:#0a0a0af2;
- border-bottom:1px solid #242424
-}
-
-.brand{
- font-size:22px;
- font-weight:900
-}
-
-.adminEmail{
- color:#aaa;
- font-size:13px;
- margin-right:10px
-}
-
-.logoutBtn{
- border:1px solid #444;
- background:#191919;
- color:#fff;
- padding:9px 13px;
- border-radius:10px
+button{
+  cursor:pointer;
+  border:0;
 }
 
 .container{
- width:100%;
- max-width:1200px;
- margin:auto;
- padding:24px
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
 }
 
-.dashboard{
- display:grid;
- grid-template-columns:220px 1fr;
- gap:22px
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:#ff2020;
+  letter-spacing:1px;
 }
 
-.sidebar{
- background:#0e0e0e;
- border:1px solid #252525;
- border-radius:18px;
- padding:15px;
- height:max-content
+.logo span{
+  color:#fff;
 }
 
-.sideTitle{
- color:#777;
- font-size:12px;
- text-transform:uppercase;
- margin:5px 10px 12px
+.card{
+  background:#111;
+  border:1px solid #252525;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.sideBtn{
- width:100%;
- text-align:left;
- border:0;
- background:transparent;
- color:#bbb;
- padding:12px;
- border-radius:10px;
- margin-bottom:5px
+.login{
+  max-width:430px;
+  margin:70px auto;
 }
 
-.sideBtn.active,
-.sideBtn:hover{
- background:#1b1b1b;
- color:#fff
+h1{
+  margin-bottom:10px;
 }
 
-.main{min-width:0}
-
-.pageTitle{
- font-size:28px;
- font-weight:900;
- margin-bottom:6px
+h2{
+  margin-bottom:15px;
 }
 
-.pageDesc{
- color:#888;
- margin-bottom:22px
+p{
+  color:#aaa;
+  line-height:1.5;
 }
 
-.stats{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:14px;
- margin-bottom:22px
+input,textarea,select{
+  width:100%;
+  background:#0b0b0b;
+  color:#fff;
+  border:1px solid #333;
+  padding:14px;
+  border-radius:10px;
+  outline:none;
+  margin:7px 0 12px;
 }
 
-.stat{
- background:#111;
- border:1px solid #252525;
- border-radius:16px;
- padding:18px
+textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.stat small{color:#888}
-
-.stat strong{
- display:block;
- font-size:27px;
- margin-top:8px
+input:focus,textarea:focus,select:focus{
+  border-color:#ff3030;
 }
 
-.panel{
- background:#101010;
- border:1px solid #252525;
- border-radius:18px;
- padding:20px;
- margin-bottom:22px
+.btn{
+  background:#e50914;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  margin:4px;
 }
 
-.panelTitle{
- font-size:19px;
- font-weight:800;
- margin-bottom:17px
+.btn:hover{
+  opacity:.85;
+}
+
+.btn.secondary{
+  background:#292929;
+}
+
+.btn.green{
+  background:#138a4b;
+}
+
+.btn.danger{
+  background:#b00020;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.nav button{
+  background:#191919;
+  color:#fff;
+  padding:11px 15px;
+  border-radius:10px;
+}
+
+.nav button.active{
+  background:#e50914;
 }
 
 .grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:15px
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
 }
 
-.full{grid-column:1/-1}
-
-.message{
- text-align:center;
- font-size:14px;
- margin-top:12px;
- line-height:1.5
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
 }
 
-.movieList,
-.seriesList,
-.episodeList{
- display:flex;
- flex-direction:column;
- gap:10px
+.stat{
+  background:#161616;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #282828;
+}
+
+.stat strong{
+  display:block;
+  font-size:30px;
+  margin-top:8px;
+  color:#ff3030;
 }
 
 .item{
- background:#181818;
- border:1px solid #292929;
- border-radius:14px;
- padding:14px;
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px
+  background:#151515;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid #292929;
 }
 
-.itemInfo{min-width:0}
-
-.itemTitle{
- font-weight:800;
- margin-bottom:5px
+.item h3{
+  margin-bottom:8px;
 }
 
-.itemMeta{
- color:#888;
- font-size:13px
+.item p{
+  margin-bottom:7px;
+  font-size:14px;
 }
 
-.itemActions{
- display:flex;
- gap:7px;
- flex-shrink:0;
- flex-wrap:wrap
+.hidden{
+  display:none!important;
 }
 
-.deleteBtn{
- border:1px solid #54202a;
- background:#241014;
- color:#ff6b82;
- border-radius:9px;
- padding:9px 12px
+.error{
+  background:#3b1010;
+  border:1px solid #9b2727;
+  color:#ffb5b5;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
 }
 
-.openBtn{
- border:1px solid #3b3b3b;
- background:#222;
- color:#fff;
- border-radius:9px;
- padding:9px 12px
+.success{
+  background:#0c331f;
+  border:1px solid #1b814d;
+  color:#a9ffd0;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
 }
 
-.empty{
- color:#777;
- text-align:center;
- padding:25px
+.small{
+  font-size:13px;
+  color:#777;
 }
 
-.seasonBox{
- background:#0d0d0d;
- border:1px solid #292929;
- border-radius:14px;
- padding:15px;
- margin-top:12px
-}
-
-.seasonHeader{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px
-}
-
-.seasonTitle{font-weight:800}
-
-.episodeRow{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- background:#181818;
- border-radius:10px;
- padding:10px;
- margin-top:8px
-}
-
-.episodeName{font-size:14px}
-
-.smallBtn{
- border:1px solid #444;
- background:#222;
- color:#fff;
- border-radius:8px;
- padding:7px 10px
-}
-
-.modal{
- position:fixed;
- inset:0;
- background:#000b;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:20px;
- z-index:50
-}
-
-.modalBox{
- width:100%;
- max-width:650px;
- max-height:90vh;
- overflow:auto;
- background:#111;
- border:1px solid #333;
- border-radius:20px;
- padding:22px
-}
-
-.modalHeader{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:20px
-}
-
-.closeBtn{
- border:0;
- background:#222;
- color:#fff;
- border-radius:8px;
- padding:8px 12px
-}
-
-.loading{
- text-align:center;
- color:#999;
- padding:20px
-}
-
-@media(max-width:850px){
- .dashboard{grid-template-columns:1fr}
-
- .sidebar{
+.section-title{
+  margin-bottom:15px;
   display:flex;
-  overflow-x:auto;
-  gap:5px
- }
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
- .sideTitle{display:none}
+.badge{
+  display:inline-block;
+  background:#292929;
+  padding:5px 9px;
+  border-radius:7px;
+  font-size:12px;
+  color:#ddd;
+}
 
- .sideBtn{
-  white-space:nowrap;
-  width:auto;
-  margin:0
- }
+.preview{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+  background:#222;
+}
 
- .stats{
-  grid-template-columns:repeat(2,1fr)
- }
+.top-space{
+  margin-top:20px;
 }
 
 @media(max-width:600px){
- .grid{
-  grid-template-columns:1fr
- }
+  .container{
+    padding:12px;
+  }
 
- .full{
-  grid-column:auto
- }
+  .login{
+    margin:30px auto;
+  }
 
- .adminEmail{
-  display:none
- }
+  .card{
+    padding:15px;
+  }
 
- .container{
-  padding:15px
- }
+  .btn{
+    width:100%;
+    margin:4px 0;
+  }
 
- .item{
-  align-items:flex-start;
-  flex-direction:column
- }
-
- .itemActions{
-  width:100%
- }
+  .header{
+    align-items:flex-start;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<div id="loginPage" class="container">
 
-<section id="loginPage">
+  <div class="card login">
 
-<div class="loginBox">
+    <div class="logo">KOMA <span>STAR</span></div>
 
-<div class="logo">
-KOMA <span>STAR</span>
-</div>
+    <h1 style="margin-top:15px;">Admin Login</h1>
 
-<div class="subtitle">
-Admin Panel
-</div>
+    <p>Login to manage Koma Star content.</p>
 
-<div class="field">
-<label>Email</label>
-<input
- id="loginEmail"
- type="email"
- autocomplete="username"
- placeholder="Admin email">
-</div>
+    <br>
 
-<div class="field">
-<label>Password</label>
-<input
- id="loginPassword"
- type="password"
- autocomplete="current-password"
- placeholder="Firebase password">
-</div>
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Admin Email">
 
-<button
- id="loginButton"
- class="primaryBtn"
- onclick="login()">
-Login
-</button>
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Password">
 
-<div id="loginError" class="error"></div>
+    <button class="btn" onclick="login()">Login</button>
+
+    <div id="loginMessage"></div>
+
+    <p class="small top-space">
+      Only the authorized Firebase Admin UID can access this panel.
+    </p>
+
+  </div>
 
 </div>
-</section>
 
 
-<!-- ADMIN -->
-
-<section id="adminPage" class="hidden">
-
-<header class="topbar">
-
-<div class="brand">
-KOMA <span>STAR</span> ADMIN
-</div>
-
-<div>
-<span id="adminEmail" class="adminEmail"></span>
-
-<button
- class="logoutBtn"
- onclick="logout()">
-Logout
-</button>
-
-</div>
-</header>
-
+<div id="adminPage" class="hidden">
 
 <div class="container">
 
-<div class="dashboard">
+  <div class="header">
 
-<!-- SIDEBAR -->
+    <div>
+      <div class="logo">KOMA STAR</div>
+      <p>Admin Control Panel</p>
+    </div>
 
-<aside class="sidebar">
+    <button class="btn secondary" onclick="logout()">Logout</button>
 
-<div class="sideTitle">
-Management
-</div>
-
-<button
- class="sideBtn active"
- onclick="showSection('movies')">
-🎬 Movies
-</button>
-
-<button
- class="sideBtn"
- onclick="showSection('series')">
-📺 Series
-</button>
-
-<button
- class="sideBtn"
- onclick="comingSoon('Reality')">
-⭐ Reality
-</button>
-
-<button
- class="sideBtn"
- onclick="comingSoon('Live TV')">
-🔴 Live TV
-</button>
-
-<button
- class="sideBtn"
- onclick="comingSoon('Users')">
-👤 Users
-</button>
-
-<button
- class="sideBtn"
- onclick="comingSoon('Settings')">
-⚙️ Settings
-</button>
-
-</aside>
-
-
-<main class="main">
-
-
-<!-- MOVIES -->
-
-<div id="moviesSection">
-
-<h1 class="pageTitle">
-Movie Management
-</h1>
-
-<p class="pageDesc">
-Add and manage Koma Star movies and cartoons.
-</p>
-
-
-<div class="stats">
-
-<div class="stat">
-<small>Total Movies</small>
-<strong id="movieCount">0</strong>
-</div>
-
-<div class="stat">
-<small>Total Series</small>
-<strong id="seriesCount1">0</strong>
-</div>
-
-<div class="stat">
-<small>Total Episodes</small>
-<strong id="episodeCount1">0</strong>
-</div>
-
-<div class="stat">
-<small>Database</small>
-<strong>Firestore</strong>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<div class="panelTitle">
-Add New Movie / Cartoon
-</div>
-
-
-<div class="grid">
-
-
-<div class="field">
-<label>Title</label>
-<input
- id="title"
- type="text"
- placeholder="Movie or Cartoon title">
-</div>
-
-
-<div class="field">
-<label>Genre</label>
-
-<select id="genre">
-
-<option>Action</option>
-<option>Animation</option>
-<option>Cartoon</option>
-<option>Drama</option>
-<option>Comedy</option>
-<option>Romance</option>
-<option>Thriller</option>
-<option>Horror</option>
-<option>Sci-Fi</option>
-<option>Family</option>
-<option>Adventure</option>
-
-</select>
-
-</div>
-
-
-<div class="field full">
-
-<label>Description</label>
-
-<textarea
- id="description"
- placeholder="Description"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label>Year</label>
-
-<input
- id="year"
- type="number"
- placeholder="2026">
-
-</div>
-
-
-<div class="field">
-
-<label>Rating</label>
-
-<input
- id="rating"
- type="number"
- step="0.1"
- min="0"
- max="10"
- placeholder="8.5">
-
-</div>
-
-
-<div class="field full">
-
-<label>Poster URL</label>
-
-<input
- id="posterUrl"
- type="url"
- placeholder="https://example.com/poster.jpg">
-
-</div>
-
-
-<div class="field full">
-
-<label>Video URL</label>
-
-<input
- id="videoUrl"
- type="url"
- placeholder="https://example.com/video.mp4">
-
-</div>
-
-
-<div class="full">
-
-<button
- class="publishBtn"
- onclick="publishMovie()">
-🚀 Publish Movie
-</button>
-
-<div
- id="publishMessage"
- class="message">
-</div>
-
-</div>
+  </div>
 
-</div>
-</div>
-
-
-<div class="panel">
-
-<div class="panelTitle">
-Published Movies / Cartoons
-</div>
-
-<div
- id="movieList"
- class="movieList">
-
-<div class="empty">
-Loading movies...
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- SERIES -->
-
-<div id="seriesSection" class="hidden">
-
-<h1 class="pageTitle">
-Series Management
-</h1>
-
-<p class="pageDesc">
-Create web series, cartoon series, seasons and episodes.
-</p>
-
-
-<div class="stats">
-
-<div class="stat">
-<small>Total Movies</small>
-<strong id="movieCount2">0</strong>
-</div>
-
-<div class="stat">
-<small>Total Series</small>
-<strong id="seriesCount2">0</strong>
-</div>
-
-<div class="stat">
-<small>Total Episodes</small>
-<strong id="episodeCount2">0</strong>
-</div>
-
-<div class="stat">
-<small>Database</small>
-<strong>Firestore</strong>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<div class="panelTitle">
-Add New Web Series / Cartoon Series
-</div>
-
-
-<div class="grid">
-
-
-<div class="field">
 
-<label>Series Title</label>
+  <div class="nav">
 
-<input
- id="seriesTitle"
- type="text"
- placeholder="Dream City">
+    <button class="active" onclick="showSection('dashboard',this)">
+      Dashboard
+    </button>
 
-</div>
-
-
-<div class="field">
-
-<label>Genre</label>
-
-<select id="seriesGenre">
+    <button onclick="showSection('movies',this)">
+      Movies / Cartoons
+    </button>
 
-<option>Drama</option>
-<option>Animation</option>
-<option>Cartoon</option>
-<option>Action</option>
-<option>Comedy</option>
-<option>Thriller</option>
-<option>Romance</option>
-<option>Horror</option>
-<option>Sci-Fi</option>
-<option>Family</option>
+    <button onclick="showSection('series',this)">
+      Series
+    </button>
 
-</select>
+    <button onclick="showSection('seasons',this)">
+      Seasons
+    </button>
 
-</div>
-
+    <button onclick="showSection('episodes',this)">
+      Episodes
+    </button>
 
-<div class="field full">
+  </div>
 
-<label>Description</label>
 
-<textarea
- id="seriesDescription"
- placeholder="Series description"></textarea>
+  <!-- DASHBOARD -->
 
-</div>
+  <section id="dashboard" class="section">
 
+    <div class="card">
 
-<div class="field">
+      <h2>Dashboard</h2>
 
-<label>Year</label>
+      <p>
+        Manage your Koma Star movies, cartoons, web series,
+        seasons and episodes.
+      </p>
 
-<input
- id="seriesYear"
- type="number"
- placeholder="2026">
-
-</div>
+    </div>
 
+    <div class="stat-grid">
 
-<div class="field">
+      <div class="stat">
+        <p>Total Movies / Cartoons</p>
+        <strong id="movieCount">0</strong>
+      </div>
 
-<label>Rating</label>
+      <div class="stat">
+        <p>Total Series</p>
+        <strong id="seriesCount">0</strong>
+      </div>
 
-<input
- id="seriesRating"
- type="number"
- step="0.1"
- min="0"
- max="10"
- placeholder="8.5">
+      <div class="stat">
+        <p>Total Episodes</p>
+        <strong id="episodeCount">0</strong>
+      </div>
 
-</div>
+    </div>
 
+  </section>
 
-<div class="field full">
 
-<label>Poster URL</label>
+  <!-- MOVIES -->
 
-<input
- id="seriesPoster"
- type="url"
- placeholder="https://example.com/poster.jpg">
+  <section id="movies" class="section hidden">
 
-</div>
+    <div class="card">
 
+      <h2>Add Movie / Cartoon</h2>
 
-<div class="full">
+      <p>
+        Add your own or properly licensed content only.
+      </p>
 
-<button
- class="publishBtn"
- onclick="publishSeries()">
-📺 Publish Series
-</button>
+      <input id="movieTitle" placeholder="Movie / Cartoon Title">
 
-<div
- id="seriesMessage"
- class="message">
-</div>
+      <select id="movieGenre">
 
-</div>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Romance">Romance</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Horror">Horror</option>
+        <option value="Animation">Animation</option>
+        <option value="Cartoon">Cartoon</option>
+        <option value="Kids">Kids</option>
+        <option value="Documentary">Documentary</option>
 
-</div>
-</div>
+      </select>
 
+      <input id="movieYear" type="number" placeholder="Year">
 
-<div class="panel">
+      <input id="movieRating" type="number" step="0.1" placeholder="Rating e.g. 8.5">
 
-<div class="panelTitle">
-Published Web Series
-</div>
+      <input id="moviePoster" placeholder="Poster Image URL">
 
-<div
- id="seriesList"
- class="seriesList">
+      <textarea id="movieDescription" placeholder="Description"></textarea>
 
-<div class="empty">
-Loading series...
-</div>
+      <input id="movieVideo" placeholder="Video URL">
 
-</div>
+      <button class="btn" onclick="addMovie()">
+        Add Movie
+      </button>
 
-</div>
+      <div id="movieMessage"></div>
 
-</div>
+    </div>
 
-</main>
 
-</div>
-</div>
+    <div class="card">
 
-</section>
+      <div class="section-title">
+        <h2>Movies / Cartoons</h2>
+        <button class="btn secondary" onclick="loadMovies()">
+          Refresh
+        </button>
+      </div>
 
+      <div id="movieList" class="grid"></div>
 
-<!-- SEASON MODAL -->
+    </div>
 
-<div
- id="episodeModal"
- class="modal hidden">
+  </section>
 
-<div class="modalBox">
 
-<div class="modalHeader">
+  <!-- SERIES -->
 
-<h2 id="episodeModalTitle">
-Manage Episodes
-</h2>
+  <section id="series" class="section hidden">
 
-<button
- class="closeBtn"
- onclick="closeEpisodeModal()">
-Close
-</button>
+    <div class="card">
 
-</div>
+      <h2>Add Web Series / Cartoon Series</h2>
 
+      <input id="seriesTitle" placeholder="Series Title">
 
-<div class="panel">
+      <select id="seriesGenre">
 
-<div class="panelTitle">
-Add Season
-</div>
+        <option value="Drama">Drama</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Horror">Horror</option>
+        <option value="Animation">Animation</option>
+        <option value="Cartoon">Cartoon</option>
+        <option value="Kids">Kids</option>
 
+      </select>
 
-<div class="grid">
+      <input id="seriesYear" type="number" placeholder="Year">
 
+      <input id="seriesRating" type="number" step="0.1" placeholder="Rating">
 
-<div class="field">
+      <input id="seriesPoster" placeholder="Poster Image URL">
 
-<label>Season Number</label>
+      <textarea id="seriesDescription" placeholder="Description"></textarea>
 
-<input
- id="seasonNumber"
- type="number"
- min="1"
- placeholder="1">
+      <button class="btn" onclick="addSeries()">
+        Add Series
+      </button>
 
-</div>
+      <div id="seriesMessage"></div>
 
+    </div>
 
-<div class="field">
 
-<label>Season Name</label>
+    <div class="card">
 
-<input
- id="seasonName"
- type="text"
- placeholder="Season 1">
+      <div class="section-title">
 
-</div>
+        <h2>Series</h2>
 
+        <button class="btn secondary" onclick="loadSeries()">
+          Refresh
+        </button>
 
-<div class="full">
+      </div>
 
-<button
- class="publishBtn"
- onclick="addSeason()">
-➕ Add Season
-</button>
+      <div id="seriesList" class="grid"></div>
 
-</div>
+    </div>
 
-</div>
+  </section>
 
-</div>
 
+  <!-- SEASONS -->
 
-<div id="seasonList"></div>
+  <section id="seasons" class="section hidden">
 
-</div>
-</div>
+    <div class="card">
 
+      <h2>Add Season</h2>
 
-<!-- EPISODE MODAL -->
+      <select id="seasonSeries"></select>
 
-<div
- id="addEpisodeModal"
- class="modal hidden">
+      <input id="seasonNumber" type="number" placeholder="Season Number">
 
-<div class="modalBox">
+      <input id="seasonTitle" placeholder="Season Title">
 
-<div class="modalHeader">
+      <button class="btn" onclick="addSeason()">
+        Add Season
+      </button>
 
-<h2 id="addEpisodeTitle">
-Add Episode
-</h2>
+      <div id="seasonMessage"></div>
 
-<button
- class="closeBtn"
- onclick="closeAddEpisode()">
-Close
-</button>
+    </div>
 
-</div>
 
+    <div class="card">
 
-<div class="grid">
+      <div class="section-title">
 
+        <h2>Seasons</h2>
 
-<div class="field">
+        <button class="btn secondary" onclick="loadSeasons()">
+          Refresh
+        </button>
 
-<label>Episode Number</label>
+      </div>
 
-<input
- id="episodeNumber"
- type="number"
- min="1"
- placeholder="1">
+      <div id="seasonList" class="grid"></div>
 
-</div>
+    </div>
 
+  </section>
 
-<div class="field">
 
-<label>Episode Title</label>
+  <!-- EPISODES -->
 
-<input
- id="episodeTitle"
- type="text"
- placeholder="Episode 1">
+  <section id="episodes" class="section hidden">
 
-</div>
+    <div class="card">
 
+      <h2>Add Episode</h2>
 
-<div class="field full">
+      <select id="episodeSeries" onchange="loadSeasonOptions()"></select>
 
-<label>Description</label>
+      <select id="episodeSeason"></select>
 
-<textarea
- id="episodeDescription"
- placeholder="Episode description"></textarea>
+      <input id="episodeNumber" type="number" placeholder="Episode Number">
 
-</div>
+      <input id="episodeTitle" placeholder="Episode Title">
 
+      <textarea id="episodeDescription" placeholder="Episode Description"></textarea>
 
-<div class="field full">
+      <input id="episodePoster" placeholder="Episode Poster URL">
 
-<label>Video URL</label>
+      <input id="episodeVideo" placeholder="Episode Video URL">
 
-<input
- id="episodeVideo"
- type="url"
- placeholder="https://example.com/episode1.mp4">
+      <button class="btn" onclick="addEpisode()">
+        Add Episode
+      </button>
 
-</div>
+      <div id="episodeMessage"></div>
 
+    </div>
 
-<div class="field full">
 
-<label>Episode Thumbnail URL</label>
+    <div class="card">
 
-<input
- id="episodePoster"
- type="url"
- placeholder="https://example.com/episode1.jpg">
+      <div class="section-title">
 
-</div>
+        <h2>Episodes</h2>
 
+        <button class="btn secondary" onclick="loadEpisodes()">
+          Refresh
+        </button>
 
-<div class="full">
+      </div>
 
-<button
- class="publishBtn"
- onclick="publishEpisode()">
-🚀 Publish Episode
-</button>
+      <div id="episodeList" class="grid"></div>
 
-<div
- id="episodeMessage"
- class="message">
-</div>
+    </div>
 
-</div>
+  </section>
 
 </div>
 
-</div>
 </div>
 
 
 <script>
 
-/* FIREBASE CONFIG */
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
- apiKey:"AIzaSyD9Qt5x69KsB3VxOuvTbrDXYJHF3nN5acs",
- authDomain:"koma-star.firebaseapp.com",
- projectId:"koma-star",
- storageBucket:"koma-star.firebasestorage.app",
- messagingSenderId:"314141087569",
- appId:"1:314141087569:web:e1861e72db4f9ef5b12570",
- measurementId:"G-HYF2PZY5GR"
+
+  apiKey: "AIzaSyD9Qt5x69KsB3VxOuvTbrDXYJHF3nN5acs",
+
+  authDomain: "koma-star.firebaseapp.com",
+
+  projectId: "koma-star",
+
+  storageBucket: "koma-star.firebasestorage.app",
+
+  messagingSenderId: "314141087569",
+
+  appId: "1:314141087569:web:e1861e72db4f9ef5b12570",
+
+  measurementId: "G-HYF2PZY5GR"
+
 };
 
 
-/* FIREBASE */
+/* =========================================
+   NEW ADMIN UID
+========================================= */
+
+const ADMIN_UID = "U0zwU0uKWuMER6t2xc5V65bD4xk2";
+
+
+/* =========================================
+   FIREBASE START
+========================================= */
 
 firebase.initializeApp(firebaseConfig);
 
-const auth=firebase.auth();
-const db=firebase.firestore();
+const auth = firebase.auth();
+
+const db = firebase.firestore();
 
 
-/* IMPORTANT: NEW ADMIN UID */
+/* =========================================
+   LOGIN
+========================================= */
 
-const ADMIN_UID="TrobLBGSgTYKjGwJVQu2eEi6aVQ2";
+function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("loginMessage");
 
 
-let currentSeriesId=null;
-let currentSeriesTitle="";
-let currentSeasonId=null;
-let currentSeasonNumber=null;
+  message.innerHTML = "";
 
 
-/* AUTH STATE */
+  if(!email || !password){
 
-auth.onAuthStateChanged(async user=>{
+    message.innerHTML =
+      `<div class="error">
+        Please enter Email and Password.
+      </div>`;
 
- if(user){
-
-  if(user.uid!==ADMIN_UID){
-
-   await auth.signOut();
-
-   showLoginError(
-    "This Firebase account is not authorized as Admin."
-   );
-
-   return;
+    return;
   }
 
 
-  document
-   .getElementById("loginPage")
-   .classList.add("hidden");
+  auth.signInWithEmailAndPassword(email,password)
 
-  document
-   .getElementById("adminPage")
-   .classList.remove("hidden");
+    .then((result)=>{
+
+      if(result.user.uid !== ADMIN_UID){
+
+        auth.signOut();
+
+        message.innerHTML =
+          `<div class="error">
+            This account is not authorized as Koma Star Admin.
+          </div>`;
+
+        return;
+      }
+
+      showAdmin();
+
+    })
+
+    .catch((error)=>{
+
+      let text =
+        "Login failed. Please check your Email and Password.";
+
+      if(
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/invalid-login-credentials"
+      ){
+
+        text =
+          "Email or Password is incorrect.";
+
+      }
+
+      else if(error.code === "auth/user-not-found"){
+
+        text =
+          "This Email is not registered in Firebase Authentication.";
+
+      }
+
+      else if(error.code === "auth/wrong-password"){
+
+        text =
+          "Password is incorrect.";
+
+      }
+
+      else if(error.code === "auth/invalid-email"){
+
+        text =
+          "The Email address is invalid.";
+
+      }
+
+      else if(error.code === "auth/too-many-requests"){
+
+        text =
+          "Too many login attempts. Try again later.";
+
+      }
+
+      else{
+
+        text =
+          error.message;
+      }
 
 
-  document.getElementById("adminEmail").textContent=
-   user.email||"";
+      message.innerHTML =
+        `<div class="error">${text}</div>`;
+
+    });
+
+}
 
 
-  loadMovies();
-  loadSeries();
-  updateStats();
+/* =========================================
+   AUTH STATE
+========================================= */
 
- }else{
+auth.onAuthStateChanged((user)=>{
 
-  document
-   .getElementById("loginPage")
-   .classList.remove("hidden");
+  if(user && user.uid === ADMIN_UID){
 
-  document
-   .getElementById("adminPage")
-   .classList.add("hidden");
+    showAdmin();
 
- }
+  }else{
+
+    showLogin();
+
+  }
 
 });
 
 
-/* LOGIN */
+function showLogin(){
 
-async function login(){
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
 
- const email=
-  document.getElementById("loginEmail").value.trim();
+  document
+    .getElementById("adminPage")
+    .classList.add("hidden");
 
- const password=
-  document.getElementById("loginPassword").value;
-
- const button=
-  document.getElementById("loginButton");
-
-
- document.getElementById("loginError").textContent="";
+}
 
 
- if(!email||!password){
+function showAdmin(){
 
-  showLoginError(
-   "Please enter your email and password."
-  );
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
 
-  return;
- }
+  document
+    .getElementById("adminPage")
+    .classList.remove("hidden");
 
+  loadAll();
 
- button.disabled=true;
- button.textContent="Signing in...";
-
-
- try{
-
-  const result=
-   await auth.signInWithEmailAndPassword(
-    email,
-    password
-   );
+}
 
 
-  if(result.user.uid!==ADMIN_UID){
+function logout(){
 
-   await auth.signOut();
+  auth.signOut();
 
-   showLoginError(
-    "Login successful, but this account is not the Koma Star Admin account."
-   );
+}
 
-   return;
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function showSection(id,button){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.add("hidden");
+    });
+
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+
+  button.classList.add("active");
+
+
+  if(id==="seasons"){
+
+    loadSeriesSelect("seasonSeries");
+    loadSeasons();
+
+  }
+
+  if(id==="episodes"){
+
+    loadSeriesSelect("episodeSeries");
+    loadSeasonOptions();
+    loadEpisodes();
+
+  }
+
+  if(id==="movies"){
+
+    loadMovies();
+
+  }
+
+  if(id==="series"){
+
+    loadSeries();
+
+  }
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function success(id,text){
+
+  document.getElementById(id).innerHTML =
+    `<div class="success">${text}</div>`;
+
+}
+
+
+function error(id,text){
+
+  document.getElementById(id).innerHTML =
+    `<div class="error">${text}</div>`;
+
+}
+
+
+/* =========================================
+   ADD MOVIE
+========================================= */
+
+async function addMovie(){
+
+  const title =
+    document.getElementById("movieTitle").value.trim();
+
+  const genre =
+    document.getElementById("movieGenre").value;
+
+  const description =
+    document.getElementById("movieDescription").value.trim();
+
+  const year =
+    Number(document.getElementById("movieYear").value) || 0;
+
+  const rating =
+    Number(document.getElementById("movieRating").value) || 0;
+
+  const posterUrl =
+    document.getElementById("moviePoster").value.trim();
+
+  const videoUrl =
+    document.getElementById("movieVideo").value.trim();
+
+
+  if(!title){
+
+    error("movieMessage","Movie title is required.");
+
+    return;
   }
 
 
- }catch(error){
+  try{
 
-  console.error(error);
+    await db.collection("movies").add({
 
-  let message="Login failed.";
+      title:title,
 
-  if(
-   error.code==="auth/invalid-credential" ||
-   error.code==="auth/invalid-login-credentials"
-  ){
+      genre:genre,
 
-   message=
-    "Email or password is incorrect. Use the Firebase Authentication password, not your Gmail password.";
+      description:description,
 
-  }else if(error.code==="auth/user-not-found"){
+      year:year,
 
-   message="No Firebase account exists with this email.";
+      rating:rating,
 
-  }else if(error.code==="auth/wrong-password"){
+      posterUrl:posterUrl,
 
-   message=
-    "The Firebase password is incorrect.";
+      videoUrl:videoUrl,
 
-  }else if(error.code==="auth/invalid-email"){
+      createdAt:
+        firebase.firestore.FieldValue.serverTimestamp()
 
-   message="Please enter a valid email address.";
+    });
 
-  }else if(error.code==="auth/too-many-requests"){
 
-   message=
-    "Too many login attempts. Please wait and try again.";
+    success(
+      "movieMessage",
+      "Movie / Cartoon added successfully."
+    );
 
-  }else{
 
-   message=error.message;
+    document.getElementById("movieTitle").value="";
+    document.getElementById("movieDescription").value="";
+    document.getElementById("movieYear").value="";
+    document.getElementById("movieRating").value="";
+    document.getElementById("moviePoster").value="";
+    document.getElementById("movieVideo").value="";
+
+
+    loadMovies();
+
+  }catch(e){
+
+    error("movieMessage",e.message);
+
   }
 
-
-  showLoginError(message);
-
- }finally{
-
-  button.disabled=false;
-  button.textContent="Login";
-
- }
-
 }
 
 
-async function logout(){
-
- try{
-  await auth.signOut();
- }catch(error){
-  console.error(error);
- }
-
-}
-
-
-/* LOGIN ERROR */
-
-function showLoginError(message){
-
- document.getElementById("loginError").textContent=
-  message;
-
-}
-
-
-/* SECTION */
-
-function showSection(section){
-
- document
-  .getElementById("moviesSection")
-  .classList.add("hidden");
-
- document
-  .getElementById("seriesSection")
-  .classList.add("hidden");
-
-
- document
-  .querySelectorAll(".sideBtn")
-  .forEach(x=>x.classList.remove("active"));
-
-
- if(section==="movies"){
-
-  document
-   .getElementById("moviesSection")
-   .classList.remove("hidden");
-
-  document
-   .querySelectorAll(".sideBtn")[0]
-   .classList.add("active");
-
- }
-
-
- if(section==="series"){
-
-  document
-   .getElementById("seriesSection")
-   .classList.remove("hidden");
-
-  document
-   .querySelectorAll(".sideBtn")[1]
-   .classList.add("active");
-
- }
-
-}
-
-
-/* MOVIE PUBLISH */
-
-async function publishMovie(){
-
- const title=
-  document.getElementById("title").value.trim();
-
- const genre=
-  document.getElementById("genre").value;
-
- const description=
-  document.getElementById("description").value.trim();
-
- const year=
-  document.getElementById("year").value;
-
- const rating=
-  document.getElementById("rating").value;
-
- const posterUrl=
-  document.getElementById("posterUrl").value.trim();
-
- const videoUrl=
-  document.getElementById("videoUrl").value.trim();
-
-
- if(!title||!description||!year||!videoUrl){
-
-  showMovieMessage(
-   "Please fill Title, Description, Year and Video URL.",
-   true
-  );
-
-  return;
- }
-
-
- try{
-
-  const user=auth.currentUser;
-
-
-  if(!user||user.uid!==ADMIN_UID){
-
-   showMovieMessage(
-    "Admin authentication required.",
-    true
-   );
-
-   return;
-  }
-
-
-  await db.collection("movies").add({
-
-   title:title,
-   genre:genre,
-   description:description,
-   year:Number(year),
-   rating:rating?Number(rating):0,
-   posterUrl:posterUrl,
-   videoUrl:videoUrl,
-   published:true,
-   createdAt:
-    firebase.firestore.FieldValue.serverTimestamp(),
-   createdBy:user.uid
-
-  });
-
-
-  document.getElementById("title").value="";
-  document.getElementById("description").value="";
-  document.getElementById("year").value="";
-  document.getElementById("rating").value="";
-  document.getElementById("posterUrl").value="";
-  document.getElementById("videoUrl").value="";
-
-
-  showMovieMessage(
-   "Movie / Cartoon published successfully!"
-  );
-
-
-  loadMovies();
-  updateStats();
-
- }catch(error){
-
-  console.error(error);
-
-  showMovieMessage(
-   error.message,
-   true
-  );
-
- }
-
-}
-
-
-function showMovieMessage(message,error=false){
-
- const box=
-  document.getElementById("publishMessage");
-
- box.textContent=message;
-
- box.style.color=
-  error?"#ff657f":"#8cffae";
-
-}
-
-
-/* LOAD MOVIES */
+/* =========================================
+   LOAD MOVIES
+========================================= */
 
 async function loadMovies(){
 
- const list=
-  document.getElementById("movieList");
+  const box =
+    document.getElementById("movieList");
 
+  box.innerHTML =
+    "<p>Loading...</p>";
 
- try{
 
-  const snapshot=
-   await db.collection("movies").get();
+  try{
 
+    const snapshot =
+      await db.collection("movies").get();
 
-  if(snapshot.empty){
 
-   list.innerHTML=
-    '<div class="empty">No movies found.</div>';
+    box.innerHTML="";
 
-   return;
-  }
 
+    document.getElementById("movieCount").textContent =
+      snapshot.size;
 
-  const movies=[];
 
+    if(snapshot.empty){
 
-  snapshot.forEach(doc=>{
+      box.innerHTML =
+        "<p>No movies added yet.</p>";
 
-   movies.push({
-    id:doc.id,
-    ...doc.data()
-   });
-
-  });
-
-
-  movies.sort((a,b)=>{
-
-   const aTime=
-    a.createdAt?.toMillis?
-    a.createdAt.toMillis():0;
-
-   const bTime=
-    b.createdAt?.toMillis?
-    b.createdAt.toMillis():0;
-
-   return bTime-aTime;
-
-  });
-
-
-  list.innerHTML="";
-
-
-  movies.forEach(movie=>{
-
-   const item=
-    document.createElement("div");
-
-   item.className="item";
-
-
-   const info=
-    document.createElement("div");
-
-   info.className="itemInfo";
-
-
-   const title=
-    document.createElement("div");
-
-   title.className="itemTitle";
-
-   title.textContent=
-    movie.title||"Untitled";
-
-
-   const meta=
-    document.createElement("div");
-
-   meta.className="itemMeta";
-
-   meta.textContent=
-    `${movie.genre||"Unknown"} • ${movie.year||"-"} • Rating ${movie.rating||0}`;
-
-
-   info.appendChild(title);
-   info.appendChild(meta);
-
-
-   const actions=
-    document.createElement("div");
-
-   actions.className="itemActions";
-
-
-   const del=
-    document.createElement("button");
-
-   del.className="deleteBtn";
-
-   del.textContent="Delete";
-
-   del.onclick=()=>{
-    deleteMovie(
-     movie.id,
-     movie.title
-    );
-   };
-
-
-   actions.appendChild(del);
-
-   item.appendChild(info);
-   item.appendChild(actions);
-
-   list.appendChild(item);
-
-  });
-
-
- }catch(error){
-
-  console.error(error);
-
-  list.innerHTML=
-   `<div class="empty">
-   ${escapeHtml(error.message)}
-   </div>`;
-
- }
-
-}
-
-
-/* DELETE MOVIE */
-
-async function deleteMovie(id,title){
-
- const user=auth.currentUser;
-
-
- if(!user||user.uid!==ADMIN_UID){
-
-  alert("Admin authentication required.");
-
-  return;
- }
-
-
- if(
-  !confirm(
-   `Delete "${title||"this movie"}"?`
-  )
- )return;
-
-
- try{
-
-  await db
-   .collection("movies")
-   .doc(id)
-   .delete();
-
-
-  loadMovies();
-  updateStats();
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
-
-/* SERIES PUBLISH */
-
-async function publishSeries(){
-
- const title=
-  document.getElementById("seriesTitle").value.trim();
-
- const genre=
-  document.getElementById("seriesGenre").value;
-
- const description=
-  document.getElementById("seriesDescription").value.trim();
-
- const year=
-  document.getElementById("seriesYear").value;
-
- const rating=
-  document.getElementById("seriesRating").value;
-
- const posterUrl=
-  document.getElementById("seriesPoster").value.trim();
-
-
- if(!title||!description||!year){
-
-  showSeriesMessage(
-   "Please fill Title, Description and Year.",
-   true
-  );
-
-  return;
- }
-
-
- try{
-
-  const user=auth.currentUser;
-
-
-  if(!user||user.uid!==ADMIN_UID){
-
-   showSeriesMessage(
-    "Admin authentication required.",
-    true
-   );
-
-   return;
-  }
-
-
-  await db.collection("series").add({
-
-   title:title,
-   genre:genre,
-   description:description,
-   year:Number(year),
-   rating:rating?Number(rating):0,
-   posterUrl:posterUrl,
-   published:true,
-   createdAt:
-    firebase.firestore.FieldValue.serverTimestamp(),
-   createdBy:user.uid
-
-  });
-
-
-  document.getElementById("seriesTitle").value="";
-  document.getElementById("seriesDescription").value="";
-  document.getElementById("seriesYear").value="";
-  document.getElementById("seriesRating").value="";
-  document.getElementById("seriesPoster").value="";
-
-
-  showSeriesMessage(
-   "Series published successfully!"
-  );
-
-
-  loadSeries();
-  updateStats();
-
-
- }catch(error){
-
-  console.error(error);
-
-  showSeriesMessage(
-   error.message,
-   true
-  );
-
- }
-
-}
-
-
-function showSeriesMessage(message,error=false){
-
- const box=
-  document.getElementById("seriesMessage");
-
- box.textContent=message;
-
- box.style.color=
-  error?"#ff657f":"#8cffae";
-
-}
-
-
-/* LOAD SERIES */
-
-async function loadSeries(){
-
- const list=
-  document.getElementById("seriesList");
-
-
- try{
-
-  const snapshot=
-   await db.collection("series").get();
-
-
-  if(snapshot.empty){
-
-   list.innerHTML=
-    '<div class="empty">No series found.</div>';
-
-   return;
-  }
-
-
-  const series=[];
-
-
-  snapshot.forEach(doc=>{
-
-   series.push({
-    id:doc.id,
-    ...doc.data()
-   });
-
-  });
-
-
-  series.sort((a,b)=>{
-
-   const aTime=
-    a.createdAt?.toMillis?
-    a.createdAt.toMillis():0;
-
-   const bTime=
-    b.createdAt?.toMillis?
-    b.createdAt.toMillis():0;
-
-   return bTime-aTime;
-
-  });
-
-
-  list.innerHTML="";
-
-
-  for(const itemData of series){
-
-   const item=
-    document.createElement("div");
-
-   item.className="item";
-
-
-   const info=
-    document.createElement("div");
-
-   info.className="itemInfo";
-
-
-   const title=
-    document.createElement("div");
-
-   title.className="itemTitle";
-
-   title.textContent=
-    itemData.title||"Untitled Series";
-
-
-   const meta=
-    document.createElement("div");
-
-   meta.className="itemMeta";
-
-   meta.textContent=
-    `${itemData.genre||"Unknown"} • ${itemData.year||"-"} • Rating ${itemData.rating||0}`;
-
-
-   info.appendChild(title);
-   info.appendChild(meta);
-
-
-   const actions=
-    document.createElement("div");
-
-   actions.className="itemActions";
-
-
-   const manage=
-    document.createElement("button");
-
-   manage.className="openBtn";
-
-   manage.textContent=
-    "Seasons & Episodes";
-
-   manage.onclick=()=>{
-
-    openEpisodeManager(
-     itemData.id,
-     itemData.title
-    );
-
-   };
-
-
-   const del=
-    document.createElement("button");
-
-   del.className="deleteBtn";
-
-   del.textContent="Delete";
-
-   del.onclick=()=>{
-
-    deleteSeries(
-     itemData.id,
-     itemData.title
-    );
-
-   };
-
-
-   actions.appendChild(manage);
-   actions.appendChild(del);
-
-   item.appendChild(info);
-   item.appendChild(actions);
-
-   list.appendChild(item);
-
-  }
-
-
- }catch(error){
-
-  console.error(error);
-
-  list.innerHTML=
-   `<div class="empty">
-   ${escapeHtml(error.message)}
-   </div>`;
-
- }
-
-}
-
-
-/* DELETE SERIES */
-
-async function deleteSeries(id,title){
-
- const user=auth.currentUser;
-
-
- if(!user||user.uid!==ADMIN_UID){
-
-  alert("Admin authentication required.");
-
-  return;
- }
-
-
- if(
-  !confirm(
-   `Delete "${title||"this series"}"?`
-  )
- )return;
-
-
- try{
-
-  await db
-   .collection("series")
-   .doc(id)
-   .delete();
-
-
-  loadSeries();
-  updateStats();
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
-
-/* EPISODE MANAGER */
-
-async function openEpisodeManager(
- seriesId,
- seriesTitle
-){
-
- currentSeriesId=seriesId;
- currentSeriesTitle=
-  seriesTitle||"Series";
-
-
- document
-  .getElementById("episodeModalTitle")
-  .textContent=
-   currentSeriesTitle+
-   " — Seasons & Episodes";
-
-
- document
-  .getElementById("episodeModal")
-  .classList.remove("hidden");
-
-
- loadSeasons();
-
-}
-
-
-function closeEpisodeModal(){
-
- document
-  .getElementById("episodeModal")
-  .classList.add("hidden");
-
-}
-
-
-/* ADD SEASON */
-
-async function addSeason(){
-
- const number=
-  Number(
-   document.getElementById("seasonNumber").value
-  );
-
- const name=
-  document.getElementById("seasonName").value.trim();
-
-
- if(!number){
-
-  alert("Enter season number.");
-
-  return;
- }
-
-
- if(!currentSeriesId){
-
-  alert("Series not selected.");
-
-  return;
- }
-
-
- try{
-
-  const user=auth.currentUser;
-
-
-  if(!user||user.uid!==ADMIN_UID){
-
-   alert("Admin authentication required.");
-
-   return;
-  }
-
-
-  await db
-   .collection("series")
-   .doc(currentSeriesId)
-   .collection("seasons")
-   .add({
-
-    seasonNumber:number,
-
-    name:
-     name||`Season ${number}`,
-
-    createdAt:
-     firebase.firestore.FieldValue.serverTimestamp(),
-
-    createdBy:user.uid
-
-   });
-
-
-  document.getElementById(
-   "seasonNumber"
-  ).value="";
-
-  document.getElementById(
-   "seasonName"
-  ).value="";
-
-
-  loadSeasons();
-  updateStats();
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
-
-/* LOAD SEASONS */
-
-async function loadSeasons(){
-
- const list=
-  document.getElementById("seasonList");
-
-
- list.innerHTML=
-  '<div class="loading">Loading seasons...</div>';
-
-
- try{
-
-  const snapshot=
-   await db
-    .collection("series")
-    .doc(currentSeriesId)
-    .collection("seasons")
-    .get();
-
-
-  if(snapshot.empty){
-
-   list.innerHTML=
-    '<div class="empty">No seasons yet. Add Season 1.</div>';
-
-   return;
-  }
-
-
-  const seasons=[];
-
-
-  snapshot.forEach(doc=>{
-
-   seasons.push({
-    id:doc.id,
-    ...doc.data()
-   });
-
-  });
-
-
-  seasons.sort((a,b)=>
-   Number(a.seasonNumber||0)-
-   Number(b.seasonNumber||0)
-  );
-
-
-  list.innerHTML="";
-
-
-  for(const season of seasons){
-
-   const box=
-    document.createElement("div");
-
-   box.className="seasonBox";
-
-
-   const header=
-    document.createElement("div");
-
-   header.className="seasonHeader";
-
-
-   const title=
-    document.createElement("div");
-
-   title.className="seasonTitle";
-
-   title.textContent=
-    `${season.name||"Season "+season.seasonNumber}`;
-
-
-   const actions=
-    document.createElement("div");
-
-
-   const add=
-    document.createElement("button");
-
-   add.className="smallBtn";
-
-   add.textContent="Add Episode";
-
-   add.onclick=()=>{
-
-    openAddEpisode(
-     season.id,
-     season.seasonNumber,
-     season.name
-    );
-
-   };
-
-
-   const del=
-    document.createElement("button");
-
-   del.className="deleteBtn";
-
-   del.textContent="Delete Season";
-
-   del.onclick=()=>{
-
-    deleteSeason(
-     season.id
-    );
-
-   };
-
-
-   actions.appendChild(add);
-   actions.appendChild(del);
-
-   header.appendChild(title);
-   header.appendChild(actions);
-
-   box.appendChild(header);
-
-
-   const episodes=
-    document.createElement("div");
-
-   episodes.id=
-    "episodes-"+season.id;
-
-   episodes.innerHTML=
-    '<div class="empty">Loading episodes...</div>';
-
-
-   box.appendChild(episodes);
-
-   list.appendChild(box);
-
-
-   loadEpisodes(
-    season.id,
-    episodes
-   );
-
-  }
-
-
- }catch(error){
-
-  list.innerHTML=
-   `<div class="empty">
-   ${escapeHtml(error.message)}
-   </div>`;
-
- }
-
-}
-
-
-/* DELETE SEASON */
-
-async function deleteSeason(seasonId){
-
- const user=auth.currentUser;
-
-
- if(!user||user.uid!==ADMIN_UID){
-
-  alert("Admin authentication required.");
-
-  return;
- }
-
-
- if(!confirm("Delete this season and all episodes?"))
-  return;
-
-
- try{
-
-  const seasonRef=
-   db
-    .collection("series")
-    .doc(currentSeriesId)
-    .collection("seasons")
-    .doc(seasonId);
-
-
-  const episodes=
-   await seasonRef
-    .collection("episodes")
-    .get();
-
-
-  const batch=db.batch();
-
-
-  episodes.forEach(doc=>{
-   batch.delete(doc.ref);
-  });
-
-
-  batch.delete(seasonRef);
-
-  await batch.commit();
-
-
-  loadSeasons();
-  updateStats();
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
-
-/* ADD EPISODE */
-
-function openAddEpisode(
- seasonId,
- seasonNumber,
- seasonName
-){
-
- currentSeasonId=seasonId;
- currentSeasonNumber=seasonNumber;
-
-
- document
-  .getElementById("addEpisodeTitle")
-  .textContent=
-   `${currentSeriesTitle} — ${seasonName||"Season "+seasonNumber}`;
-
-
- document.getElementById(
-  "episodeNumber"
- ).value="";
-
- document.getElementById(
-  "episodeTitle"
- ).value="";
-
- document.getElementById(
-  "episodeDescription"
- ).value="";
-
- document.getElementById(
-  "episodeVideo"
- ).value="";
-
- document.getElementById(
-  "episodePoster"
- ).value="";
-
- document.getElementById(
-  "episodeMessage"
- ).textContent="";
-
-
- document
-  .getElementById("addEpisodeModal")
-  .classList.remove("hidden");
-
-}
-
-
-function closeAddEpisode(){
-
- document
-  .getElementById("addEpisodeModal")
-  .classList.add("hidden");
-
-}
-
-
-/* PUBLISH EPISODE */
-
-async function publishEpisode(){
-
- const number=
-  Number(
-   document.getElementById("episodeNumber").value
-  );
-
- const title=
-  document.getElementById("episodeTitle").value.trim();
-
- const description=
-  document.getElementById("episodeDescription").value.trim();
-
- const video=
-  document.getElementById("episodeVideo").value.trim();
-
- const poster=
-  document.getElementById("episodePoster").value.trim();
-
-
- if(!number||!title||!video){
-
-  showEpisodeMessage(
-   "Episode number, title and video URL are required.",
-   true
-  );
-
-  return;
- }
-
-
- try{
-
-  const user=auth.currentUser;
-
-
-  if(!user||user.uid!==ADMIN_UID){
-
-   showEpisodeMessage(
-    "Admin authentication required.",
-    true
-   );
-
-   return;
-  }
-
-
-  await db
-   .collection("series")
-   .doc(currentSeriesId)
-   .collection("seasons")
-   .doc(currentSeasonId)
-   .collection("episodes")
-   .add({
-
-    episodeNumber:number,
-
-    title:title,
-
-    description:description,
-
-    videoUrl:video,
-
-    posterUrl:poster,
-
-    published:true,
-
-    createdAt:
-     firebase.firestore.FieldValue.serverTimestamp(),
-
-    createdBy:user.uid
-
-   });
-
-
-  showEpisodeMessage(
-   "Episode published successfully!"
-  );
-
-
-  document.getElementById(
-   "episodeNumber"
-  ).value="";
-
-  document.getElementById(
-   "episodeTitle"
-  ).value="";
-
-  document.getElementById(
-   "episodeDescription"
-  ).value="";
-
-  document.getElementById(
-   "episodeVideo"
-  ).value="";
-
-  document.getElementById(
-   "episodePoster"
-  ).value="";
-
-
-  setTimeout(()=>{
-
-   closeAddEpisode();
-
-   loadSeasons();
-
-   updateStats();
-
-  },500);
-
-
- }catch(error){
-
-  console.error(error);
-
-  showEpisodeMessage(
-   error.message,
-   true
-  );
-
- }
-
-}
-
-
-/* EPISODE MESSAGE */
-
-function showEpisodeMessage(
- message,
- error=false
-){
-
- const box=
-  document.getElementById("episodeMessage");
-
- box.textContent=message;
-
- box.style.color=
-  error?"#ff657f":"#8cffae";
-
-}
-
-
-/* LOAD EPISODES */
-
-async function loadEpisodes(
- seasonId,
- container
-){
-
- try{
-
-  const snapshot=
-   await db
-    .collection("series")
-    .doc(currentSeriesId)
-    .collection("seasons")
-    .doc(seasonId)
-    .collection("episodes")
-    .get();
-
-
-  if(snapshot.empty){
-
-   container.innerHTML=
-    '<div class="empty">No episodes yet. Add Episode 1.</div>';
-
-   return;
-  }
-
-
-  const episodes=[];
-
-
-  snapshot.forEach(doc=>{
-
-   episodes.push({
-    id:doc.id,
-    ...doc.data()
-   });
-
-  });
-
-
-  episodes.sort((a,b)=>
-   Number(a.episodeNumber||0)-
-   Number(b.episodeNumber||0)
-  );
-
-
-  container.innerHTML="";
-
-
-  episodes.forEach(ep=>{
-
-   const row=
-    document.createElement("div");
-
-   row.className="episodeRow";
-
-
-   const name=
-    document.createElement("div");
-
-   name.className="episodeName";
-
-   name.textContent=
-    `Episode ${ep.episodeNumber}: ${ep.title}`;
-
-
-   const del=
-    document.createElement("button");
-
-   del.className="deleteBtn";
-
-   del.textContent="Delete";
-
-
-   del.onclick=async()=>{
-
-    if(!confirm(`Delete "${ep.title}"?`))
-     return;
-
-
-    try{
-
-     await db
-      .collection("series")
-      .doc(currentSeriesId)
-      .collection("seasons")
-      .doc(seasonId)
-      .collection("episodes")
-      .doc(ep.id)
-      .delete();
-
-
-     loadSeasons();
-     updateStats();
-
-
-    }catch(error){
-
-     alert(error.message);
+      return;
 
     }
 
-   };
+
+    snapshot.forEach(doc=>{
+
+      const data = doc.data();
+
+      const item =
+        document.createElement("div");
+
+      item.className="item";
 
 
-   row.appendChild(name);
-   row.appendChild(del);
+      item.innerHTML=`
 
-   container.appendChild(row);
+        ${
+          data.posterUrl
+          ?
+          `<img class="preview"
+                src="${escapeHtml(data.posterUrl)}"
+                onerror="this.style.display='none'">`
+          :
+          ""
+        }
 
-  });
+        <h3>${escapeHtml(data.title || "Untitled")}</h3>
 
+        <p>
+          <span class="badge">
+            ${escapeHtml(data.genre || "Unknown")}
+          </span>
+        </p>
 
- }catch(error){
+        <p>${escapeHtml(data.description || "")}</p>
 
-  container.innerHTML=
-   `<div class="empty">
-   ${escapeHtml(error.message)}
-   </div>`;
+        <p>Year: ${data.year || "-"}</p>
 
- }
+        <p>Rating: ⭐ ${data.rating || "-"}</p>
 
-}
+        <p class="small">
+          ID: ${doc.id}
+        </p>
 
+        <button class="btn danger"
+                onclick="deleteMovie('${doc.id}')">
+          Delete
+        </button>
 
-/* STATS */
-
-async function updateStats(){
-
- try{
-
-  const movies=
-   await db.collection("movies").get();
-
-  const series=
-   await db.collection("series").get();
-
-
-  let episodeTotal=0;
-
-
-  for(const s of series.docs){
-
-   const seasons=
-    await db
-     .collection("series")
-     .doc(s.id)
-     .collection("seasons")
-     .get();
+      `;
 
 
-   for(const season of seasons.docs){
+      box.appendChild(item);
 
-    const episodes=
-     await db
-      .collection("series")
-      .doc(s.id)
-      .collection("seasons")
-      .doc(season.id)
-      .collection("episodes")
-      .get();
+    });
 
+  }catch(e){
 
-    episodeTotal+=episodes.size;
-
-   }
+    box.innerHTML =
+      `<div class="error">${e.message}</div>`;
 
   }
 
-
-  document.getElementById(
-   "movieCount"
-  ).textContent=movies.size;
-
-  document.getElementById(
-   "movieCount2"
-  ).textContent=movies.size;
+}
 
 
-  document.getElementById(
-   "seriesCount1"
-  ).textContent=series.size;
+/* =========================================
+   DELETE MOVIE
+========================================= */
 
-  document.getElementById(
-   "seriesCount2"
-  ).textContent=series.size;
+async function deleteMovie(id){
 
-
-  document.getElementById(
-   "episodeCount1"
-  ).textContent=episodeTotal;
-
-  document.getElementById(
-   "episodeCount2"
-  ).textContent=episodeTotal;
+  if(!confirm("Delete this movie?")) return;
 
 
- }catch(error){
+  try{
 
-  console.error(error);
+    await db.collection("movies")
+      .doc(id)
+      .delete();
 
- }
+    loadMovies();
+
+  }catch(e){
+
+    alert(e.message);
+
+  }
 
 }
 
 
-/* OTHER */
+/* =========================================
+   ADD SERIES
+========================================= */
 
-function comingSoon(name){
+async function addSeries(){
 
- alert(
-  name+" management will be added later."
- );
+  const title =
+    document.getElementById("seriesTitle").value.trim();
+
+  const genre =
+    document.getElementById("seriesGenre").value;
+
+  const description =
+    document.getElementById("seriesDescription").value.trim();
+
+  const year =
+    Number(document.getElementById("seriesYear").value) || 0;
+
+  const rating =
+    Number(document.getElementById("seriesRating").value) || 0;
+
+  const posterUrl =
+    document.getElementById("seriesPoster").value.trim();
+
+
+  if(!title){
+
+    error("seriesMessage","Series title is required.");
+
+    return;
+  }
+
+
+  try{
+
+    await db.collection("series").add({
+
+      title:title,
+
+      genre:genre,
+
+      description:description,
+
+      year:year,
+
+      rating:rating,
+
+      posterUrl:posterUrl,
+
+      createdAt:
+        firebase.firestore.FieldValue.serverTimestamp()
+
+    });
+
+
+    success(
+      "seriesMessage",
+      "Series added successfully."
+    );
+
+
+    document.getElementById("seriesTitle").value="";
+    document.getElementById("seriesDescription").value="";
+    document.getElementById("seriesYear").value="";
+    document.getElementById("seriesRating").value="";
+    document.getElementById("seriesPoster").value="";
+
+
+    loadSeries();
+
+  }catch(e){
+
+    error("seriesMessage",e.message);
+
+  }
 
 }
 
 
-/* ESCAPE HTML */
+/* =========================================
+   LOAD SERIES
+========================================= */
 
-function escapeHtml(text){
+async function loadSeries(){
 
- return String(text)
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  const box =
+    document.getElementById("seriesList");
+
+  box.innerHTML =
+    "<p>Loading...</p>";
+
+
+  try{
+
+    const snapshot =
+      await db.collection("series").get();
+
+
+    box.innerHTML="";
+
+
+    document.getElementById("seriesCount").textContent =
+      snapshot.size;
+
+
+    if(snapshot.empty){
+
+      box.innerHTML =
+        "<p>No series added yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(doc=>{
+
+      const data=doc.data();
+
+
+      const item=
+        document.createElement("div");
+
+      item.className="item";
+
+
+      item.innerHTML=`
+
+        ${
+          data.posterUrl
+          ?
+          `<img class="preview"
+                src="${escapeHtml(data.posterUrl)}"
+                onerror="this.style.display='none'">`
+          :
+          ""
+        }
+
+        <h3>${escapeHtml(data.title || "Untitled")}</h3>
+
+        <p>
+          <span class="badge">
+            ${escapeHtml(data.genre || "Unknown")}
+          </span>
+        </p>
+
+        <p>${escapeHtml(data.description || "")}</p>
+
+        <p>Year: ${data.year || "-"}</p>
+
+        <p>Rating: ⭐ ${data.rating || "-"}</p>
+
+        <p class="small">
+          ID: ${doc.id}
+        </p>
+
+        <button class="btn danger"
+                onclick="deleteSeries('${doc.id}')">
+          Delete
+        </button>
+
+      `;
+
+
+      box.appendChild(item);
+
+    });
+
+  }catch(e){
+
+    box.innerHTML =
+      `<div class="error">${e.message}</div>`;
+
+  }
+
+}
+
+
+/* =========================================
+   DELETE SERIES
+========================================= */
+
+async function deleteSeries(id){
+
+  if(!confirm(
+    "Delete this series? Seasons and episodes are not automatically deleted."
+  )) return;
+
+
+  try{
+
+    await db.collection("series")
+      .doc(id)
+      .delete();
+
+    loadSeries();
+
+  }catch(e){
+
+    alert(e.message);
+
+  }
+
+}
+
+
+/* =========================================
+   SERIES SELECT
+========================================= */
+
+async function loadSeriesSelect(selectId){
+
+  const select =
+    document.getElementById(selectId);
+
+  if(!select) return;
+
+
+  select.innerHTML =
+    `<option value="">Select Series</option>`;
+
+
+  try{
+
+    const snapshot =
+      await db.collection("series").get();
+
+
+    snapshot.forEach(doc=>{
+
+      const data=doc.data();
+
+      const option =
+        document.createElement("option");
+
+      option.value=doc.id;
+
+      option.textContent=data.title || doc.id;
+
+      select.appendChild(option);
+
+    });
+
+  }catch(e){
+
+    console.log(e);
+
+  }
+
+}
+
+
+/* =========================================
+   ADD SEASON
+========================================= */
+
+async function addSeason(){
+
+  const seriesId =
+    document.getElementById("seasonSeries").value;
+
+  const seasonNumber =
+    Number(document.getElementById("seasonNumber").value);
+
+  const title =
+    document.getElementById("seasonTitle").value.trim();
+
+
+  if(!seriesId){
+
+    error("seasonMessage","Please select a series.");
+
+    return;
+  }
+
+
+  if(!seasonNumber){
+
+    error("seasonMessage","Enter season number.");
+
+    return;
+  }
+
+
+  try{
+
+    await db
+      .collection("series")
+      .doc(seriesId)
+      .collection("seasons")
+      .add({
+
+        seasonNumber:seasonNumber,
+
+        title:title || `Season ${seasonNumber}`,
+
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+
+      });
+
+
+    success(
+      "seasonMessage",
+      "Season added successfully."
+    );
+
+
+    document.getElementById("seasonNumber").value="";
+    document.getElementById("seasonTitle").value="";
+
+
+    loadSeasons();
+
+  }catch(e){
+
+    error("seasonMessage",e.message);
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD SEASONS
+========================================= */
+
+async function loadSeasons(){
+
+  const box =
+    document.getElementById("seasonList");
+
+  box.innerHTML =
+    "<p>Loading...</p>";
+
+
+  try{
+
+    const seriesSnapshot =
+      await db.collection("series").get();
+
+
+    box.innerHTML="";
+
+
+    let total=0;
+
+
+    for(const seriesDoc of seriesSnapshot.docs){
+
+      const seriesData =
+        seriesDoc.data();
+
+
+      const seasons =
+        await db
+          .collection("series")
+          .doc(seriesDoc.id)
+          .collection("seasons")
+          .get();
+
+
+      seasons.forEach(seasonDoc=>{
+
+        total++;
+
+
+        const data =
+          seasonDoc.data();
+
+
+        const item =
+          document.createElement("div");
+
+        item.className="item";
+
+
+        item.innerHTML=`
+
+          <h3>
+            ${escapeHtml(
+              seriesData.title || "Series"
+            )}
+          </h3>
+
+          <p>
+            Season:
+            ${data.seasonNumber || "-"}
+          </p>
+
+          <p>
+            ${escapeHtml(
+              data.title || ""
+            )}
+          </p>
+
+          <p class="small">
+            Season ID: ${seasonDoc.id}
+          </p>
+
+          <button class="btn danger"
+                  onclick="deleteSeason(
+                    '${seriesDoc.id}',
+                    '${seasonDoc.id}'
+                  )">
+            Delete
+          </button>
+
+        `;
+
+
+        box.appendChild(item);
+
+      });
+
+    }
+
+
+    if(total===0){
+
+      box.innerHTML =
+        "<p>No seasons added yet.</p>";
+
+    }
+
+  }catch(e){
+
+    box.innerHTML =
+      `<div class="error">${e.message}</div>`;
+
+  }
+
+}
+
+
+/* =========================================
+   DELETE SEASON
+========================================= */
+
+async function deleteSeason(seriesId,seasonId){
+
+  if(!confirm(
+    "Delete this season? Episodes inside it will remain unless deleted separately."
+  )) return;
+
+
+  try{
+
+    await db
+      .collection("series")
+      .doc(seriesId)
+      .collection("seasons")
+      .doc(seasonId)
+      .delete();
+
+
+    loadSeasons();
+
+  }catch(e){
+
+    alert(e.message);
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD SEASON OPTIONS
+========================================= */
+
+async function loadSeasonOptions(){
+
+  const seriesId =
+    document.getElementById("episodeSeries").value;
+
+  const select =
+    document.getElementById("episodeSeason");
+
+
+  select.innerHTML =
+    `<option value="">Select Season</option>`;
+
+
+  if(!seriesId) return;
+
+
+  try{
+
+    const snapshot =
+      await db
+        .collection("series")
+        .doc(seriesId)
+        .collection("seasons")
+        .get();
+
+
+    snapshot.forEach(doc=>{
+
+      const data=doc.data();
+
+      const option =
+        document.createElement("option");
+
+      option.value=doc.id;
+
+      option.textContent =
+        data.title ||
+        `Season ${data.seasonNumber}`;
+
+      select.appendChild(option);
+
+    });
+
+  }catch(e){
+
+    console.log(e);
+
+  }
+
+}
+
+
+/* =========================================
+   ADD EPISODE
+========================================= */
+
+async function addEpisode(){
+
+  const seriesId =
+    document.getElementById("episodeSeries").value;
+
+  const seasonId =
+    document.getElementById("episodeSeason").value;
+
+  const episodeNumber =
+    Number(
+      document.getElementById("episodeNumber").value
+    );
+
+  const title =
+    document.getElementById("episodeTitle").value.trim();
+
+  const description =
+    document.getElementById("episodeDescription").value.trim();
+
+  const posterUrl =
+    document.getElementById("episodePoster").value.trim();
+
+  const videoUrl =
+    document.getElementById("episodeVideo").value.trim();
+
+
+  if(!seriesId){
+
+    error("episodeMessage","Select a series.");
+
+    return;
+  }
+
+
+  if(!seasonId){
+
+    error("episodeMessage","Select a season.");
+
+    return;
+  }
+
+
+  if(!episodeNumber){
+
+    error("episodeMessage","Enter episode number.");
+
+    return;
+  }
+
+
+  if(!title){
+
+    error("episodeMessage","Episode title is required.");
+
+    return;
+  }
+
+
+  try{
+
+    await db
+      .collection("series")
+      .doc(seriesId)
+      .collection("seasons")
+      .doc(seasonId)
+      .collection("episodes")
+      .add({
+
+        episodeNumber:episodeNumber,
+
+        title:title,
+
+        description:description,
+
+        posterUrl:posterUrl,
+
+        videoUrl:videoUrl,
+
+        createdAt:
+          firebase.firestore.FieldValue.serverTimestamp()
+
+      });
+
+
+    success(
+      "episodeMessage",
+      "Episode added successfully."
+    );
+
+
+    document.getElementById("episodeNumber").value="";
+    document.getElementById("episodeTitle").value="";
+    document.getElementById("episodeDescription").value="";
+    document.getElementById("episodePoster").value="";
+    document.getElementById("episodeVideo").value="";
+
+
+    loadEpisodes();
+
+  }catch(e){
+
+    error("episodeMessage",e.message);
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD EPISODES
+========================================= */
+
+async function loadEpisodes(){
+
+  const box =
+    document.getElementById("episodeList");
+
+  box.innerHTML =
+    "<p>Loading...</p>";
+
+
+  try{
+
+    const seriesSnapshot =
+      await db.collection("series").get();
+
+
+    box.innerHTML="";
+
+
+    let total=0;
+
+
+    for(const seriesDoc of seriesSnapshot.docs){
+
+      const seriesData =
+        seriesDoc.data();
+
+
+      const seasons =
+        await db
+          .collection("series")
+          .doc(seriesDoc.id)
+          .collection("seasons")
+          .get();
+
+
+      for(const seasonDoc of seasons.docs){
+
+        const seasonData =
+          seasonDoc.data();
+
+
+        const episodes =
+          await db
+            .collection("series")
+            .doc(seriesDoc.id)
+            .collection("seasons")
+            .doc(seasonDoc.id)
+            .collection("episodes")
+            .get();
+
+
+        episodes.forEach(episodeDoc=>{
+
+          total++;
+
+
+          const data =
+            episodeDoc.data();
+
+
+          const item =
+            document.createElement("div");
+
+          item.className="item";
+
+
+          item.innerHTML=`
+
+            ${
+              data.posterUrl
+              ?
+              `<img class="preview"
+                    src="${escapeHtml(data.posterUrl)}"
+                    onerror="this.style.display='none'">`
+              :
+              ""
+            }
+
+            <h3>
+              ${escapeHtml(
+                seriesData.title || "Series"
+              )}
+            </h3>
+
+            <p>
+              ${escapeHtml(
+                seasonData.title ||
+                `Season ${seasonData.seasonNumber || ""}`
+              )}
+            </p>
+
+            <p>
+              Episode ${data.episodeNumber || "-"}:
+              ${escapeHtml(data.title || "")}
+            </p>
+
+            <p>
+              ${escapeHtml(data.description || "")}
+            </p>
+
+            <p class="small">
+              Episode ID: ${episodeDoc.id}
+            </p>
+
+            <button class="btn danger"
+                    onclick="deleteEpisode(
+                      '${seriesDoc.id}',
+                      '${seasonDoc.id}',
+                      '${episodeDoc.id}'
+                    )">
+              Delete
+            </button>
+
+          `;
+
+
+          box.appendChild(item);
+
+        });
+
+      }
+
+    }
+
+
+    document.getElementById("episodeCount").textContent =
+      total;
+
+
+    if(total===0){
+
+      box.innerHTML =
+        "<p>No episodes added yet.</p>";
+
+    }
+
+  }catch(e){
+
+    box.innerHTML =
+      `<div class="error">${e.message}</div>`;
+
+  }
+
+}
+
+
+/* =========================================
+   DELETE EPISODE
+========================================= */
+
+async function deleteEpisode(
+  seriesId,
+  seasonId,
+  episodeId
+){
+
+  if(!confirm("Delete this episode?")) return;
+
+
+  try{
+
+    await db
+      .collection("series")
+      .doc(seriesId)
+      .collection("seasons")
+      .doc(seasonId)
+      .collection("episodes")
+      .doc(episodeId)
+      .delete();
+
+
+    loadEpisodes();
+
+  }catch(e){
+
+    alert(e.message);
+
+  }
+
+}
+
+
+/* =========================================
+   LOAD EVERYTHING
+========================================= */
+
+async function loadAll(){
+
+  loadMovies();
+
+  loadSeries();
+
+  loadSeriesSelect("seasonSeries");
+
+  loadSeriesSelect("episodeSeries");
+
+  loadSeasonOptions();
+
+  loadSeasons();
+
+  loadEpisodes();
+
+}
+
+
+/* =========================================
+   HTML ESCAPE
+========================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
