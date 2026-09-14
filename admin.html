@@ -17,235 +17,626 @@ button{cursor:pointer}
 .hidden{display:none!important}
 
 #loginPage{
- min-height:100vh;display:flex;align-items:center;justify-content:center;
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  padding:20px;
  background:radial-gradient(circle at top,#3b0610,#120307 35%,#050505 70%)
 }
+
 .loginBox{
- width:100%;max-width:420px;background:#111;border:1px solid #292929;
- border-radius:24px;padding:30px;box-shadow:0 20px 60px #000
+ width:100%;
+ max-width:420px;
+ background:#111;
+ border:1px solid #292929;
+ border-radius:24px;
+ padding:30px;
+ box-shadow:0 20px 60px #000
 }
-.logo{text-align:center;font-size:34px;font-weight:900;letter-spacing:2px}
+
+.logo{
+ text-align:center;
+ font-size:34px;
+ font-weight:900;
+ letter-spacing:2px
+}
+
 .logo span,.brand span{color:#ff1744}
-.subtitle{text-align:center;color:#999;margin:8px 0 28px}
+
+.subtitle{
+ text-align:center;
+ color:#999;
+ margin:8px 0 28px
+}
+
 .field{margin-bottom:16px}
-.field label{display:block;color:#bbb;font-size:14px;margin-bottom:7px}
-.field input,.field textarea,.field select{
- width:100%;background:#191919;color:#fff;border:1px solid #333;
- border-radius:12px;padding:13px;outline:none
+
+.field label{
+ display:block;
+ color:#bbb;
+ font-size:14px;
+ margin-bottom:7px
 }
-.field textarea{min-height:100px;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#ff1744}
-.primaryBtn,.publishBtn{
- width:100%;border:0;border-radius:12px;padding:14px;color:#fff;
- font-weight:800;background:linear-gradient(135deg,#ff1744,#b00020)
+
+.field input,
+.field textarea,
+.field select{
+ width:100%;
+ background:#191919;
+ color:#fff;
+ border:1px solid #333;
+ border-radius:12px;
+ padding:13px;
+ outline:none
 }
-.error{color:#ff657f;font-size:14px;margin-top:12px;text-align:center}
+
+.field textarea{
+ min-height:100px;
+ resize:vertical
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+ border-color:#ff1744
+}
+
+.primaryBtn,
+.publishBtn{
+ width:100%;
+ border:0;
+ border-radius:12px;
+ padding:14px;
+ color:#fff;
+ font-weight:800;
+ background:linear-gradient(135deg,#ff1744,#b00020)
+}
+
+.primaryBtn:disabled{
+ opacity:.6;
+ cursor:not-allowed
+}
+
+.error{
+ color:#ff657f;
+ font-size:14px;
+ margin-top:12px;
+ text-align:center;
+ line-height:1.5
+}
+
+.success{
+ color:#8cffae;
+ font-size:14px;
+ margin-top:12px;
+ text-align:center
+}
 
 #adminPage{min-height:100vh}
+
 .topbar{
- position:sticky;top:0;z-index:10;height:70px;display:flex;
- align-items:center;justify-content:space-between;padding:0 22px;
- background:#0a0a0af2;border-bottom:1px solid #242424
+ position:sticky;
+ top:0;
+ z-index:10;
+ height:70px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 22px;
+ background:#0a0a0af2;
+ border-bottom:1px solid #242424
 }
-.brand{font-size:22px;font-weight:900}
-.adminEmail{color:#aaa;font-size:13px;margin-right:10px}
+
+.brand{
+ font-size:22px;
+ font-weight:900
+}
+
+.adminEmail{
+ color:#aaa;
+ font-size:13px;
+ margin-right:10px
+}
+
 .logoutBtn{
- border:1px solid #444;background:#191919;color:#fff;
- padding:9px 13px;border-radius:10px
+ border:1px solid #444;
+ background:#191919;
+ color:#fff;
+ padding:9px 13px;
+ border-radius:10px
 }
-.container{width:100%;max-width:1200px;margin:auto;padding:24px}
-.dashboard{display:grid;grid-template-columns:220px 1fr;gap:22px}
+
+.container{
+ width:100%;
+ max-width:1200px;
+ margin:auto;
+ padding:24px
+}
+
+.dashboard{
+ display:grid;
+ grid-template-columns:220px 1fr;
+ gap:22px
+}
+
 .sidebar{
- background:#0e0e0e;border:1px solid #252525;border-radius:18px;
- padding:15px;height:max-content
+ background:#0e0e0e;
+ border:1px solid #252525;
+ border-radius:18px;
+ padding:15px;
+ height:max-content
 }
-.sideTitle{color:#777;font-size:12px;text-transform:uppercase;margin:5px 10px 12px}
+
+.sideTitle{
+ color:#777;
+ font-size:12px;
+ text-transform:uppercase;
+ margin:5px 10px 12px
+}
+
 .sideBtn{
- width:100%;text-align:left;border:0;background:transparent;color:#bbb;
- padding:12px;border-radius:10px;margin-bottom:5px
+ width:100%;
+ text-align:left;
+ border:0;
+ background:transparent;
+ color:#bbb;
+ padding:12px;
+ border-radius:10px;
+ margin-bottom:5px
 }
-.sideBtn.active,.sideBtn:hover{background:#1b1b1b;color:#fff}
+
+.sideBtn.active,
+.sideBtn:hover{
+ background:#1b1b1b;
+ color:#fff
+}
+
 .main{min-width:0}
-.pageTitle{font-size:28px;font-weight:900;margin-bottom:6px}
-.pageDesc{color:#888;margin-bottom:22px}
 
-.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.tab{
- border:1px solid #333;background:#151515;color:#aaa;
- padding:10px 15px;border-radius:10px
+.pageTitle{
+ font-size:28px;
+ font-weight:900;
+ margin-bottom:6px
 }
-.tab.active{background:#ff1744;color:#fff;border-color:#ff1744}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.stat{background:#111;border:1px solid #252525;border-radius:16px;padding:18px}
+.pageDesc{
+ color:#888;
+ margin-bottom:22px
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px;
+ margin-bottom:22px
+}
+
+.stat{
+ background:#111;
+ border:1px solid #252525;
+ border-radius:16px;
+ padding:18px
+}
+
 .stat small{color:#888}
-.stat strong{display:block;font-size:27px;margin-top:8px}
 
-.panel{
- background:#101010;border:1px solid #252525;border-radius:18px;
- padding:20px;margin-bottom:22px
-}
-.panelTitle{font-size:19px;font-weight:800;margin-bottom:17px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.full{grid-column:1/-1}
-
-.message{text-align:center;color:#8cffae;font-size:14px;margin-top:12px}
-.movieList,.seriesList,.episodeList{display:flex;flex-direction:column;gap:10px}
-
-.item{
- background:#181818;border:1px solid #292929;border-radius:14px;
- padding:14px;display:flex;justify-content:space-between;
- align-items:center;gap:15px
-}
-.itemInfo{min-width:0}
-.itemTitle{font-weight:800;margin-bottom:5px}
-.itemMeta{color:#888;font-size:13px}
-.itemActions{display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap}
-.deleteBtn{
- border:1px solid #54202a;background:#241014;color:#ff6b82;
- border-radius:9px;padding:9px 12px
-}
-.editBtn{
- border:1px solid #33415a;background:#111b2b;color:#7eb5ff;
- border-radius:9px;padding:9px 12px
-}
-.openBtn{
- border:1px solid #3b3b3b;background:#222;color:#fff;
- border-radius:9px;padding:9px 12px
-}
-.empty{color:#777;text-align:center;padding:25px}
-.notice{color:#999;line-height:1.6}
-
-.seasonBox{
- background:#0d0d0d;border:1px solid #292929;border-radius:14px;
- padding:15px;margin-top:12px
-}
-.seasonHeader{
- display:flex;justify-content:space-between;align-items:center;gap:10px
-}
-.seasonTitle{font-weight:800}
-.episodeRow{
- display:flex;justify-content:space-between;align-items:center;
- gap:10px;background:#181818;border-radius:10px;padding:10px;
+.stat strong{
+ display:block;
+ font-size:27px;
  margin-top:8px
 }
+
+.panel{
+ background:#101010;
+ border:1px solid #252525;
+ border-radius:18px;
+ padding:20px;
+ margin-bottom:22px
+}
+
+.panelTitle{
+ font-size:19px;
+ font-weight:800;
+ margin-bottom:17px
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:15px
+}
+
+.full{grid-column:1/-1}
+
+.message{
+ text-align:center;
+ font-size:14px;
+ margin-top:12px;
+ line-height:1.5
+}
+
+.movieList,
+.seriesList,
+.episodeList{
+ display:flex;
+ flex-direction:column;
+ gap:10px
+}
+
+.item{
+ background:#181818;
+ border:1px solid #292929;
+ border-radius:14px;
+ padding:14px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px
+}
+
+.itemInfo{min-width:0}
+
+.itemTitle{
+ font-weight:800;
+ margin-bottom:5px
+}
+
+.itemMeta{
+ color:#888;
+ font-size:13px
+}
+
+.itemActions{
+ display:flex;
+ gap:7px;
+ flex-shrink:0;
+ flex-wrap:wrap
+}
+
+.deleteBtn{
+ border:1px solid #54202a;
+ background:#241014;
+ color:#ff6b82;
+ border-radius:9px;
+ padding:9px 12px
+}
+
+.openBtn{
+ border:1px solid #3b3b3b;
+ background:#222;
+ color:#fff;
+ border-radius:9px;
+ padding:9px 12px
+}
+
+.empty{
+ color:#777;
+ text-align:center;
+ padding:25px
+}
+
+.seasonBox{
+ background:#0d0d0d;
+ border:1px solid #292929;
+ border-radius:14px;
+ padding:15px;
+ margin-top:12px
+}
+
+.seasonHeader{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px
+}
+
+.seasonTitle{font-weight:800}
+
+.episodeRow{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ background:#181818;
+ border-radius:10px;
+ padding:10px;
+ margin-top:8px
+}
+
 .episodeName{font-size:14px}
+
 .smallBtn{
- border:1px solid #444;background:#222;color:#fff;
- border-radius:8px;padding:7px 10px
+ border:1px solid #444;
+ background:#222;
+ color:#fff;
+ border-radius:8px;
+ padding:7px 10px
 }
 
 .modal{
- position:fixed;inset:0;background:#000b;display:flex;
- align-items:center;justify-content:center;padding:20px;z-index:50
+ position:fixed;
+ inset:0;
+ background:#000b;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ z-index:50
 }
+
 .modalBox{
- width:100%;max-width:650px;max-height:90vh;overflow:auto;
- background:#111;border:1px solid #333;border-radius:20px;padding:22px
+ width:100%;
+ max-width:650px;
+ max-height:90vh;
+ overflow:auto;
+ background:#111;
+ border:1px solid #333;
+ border-radius:20px;
+ padding:22px
 }
+
 .modalHeader{
- display:flex;justify-content:space-between;align-items:center;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
  margin-bottom:20px
 }
+
 .closeBtn{
- border:0;background:#222;color:#fff;border-radius:8px;
+ border:0;
+ background:#222;
+ color:#fff;
+ border-radius:8px;
  padding:8px 12px
+}
+
+.loading{
+ text-align:center;
+ color:#999;
+ padding:20px
 }
 
 @media(max-width:850px){
  .dashboard{grid-template-columns:1fr}
- .sidebar{display:flex;overflow-x:auto;gap:5px}
+
+ .sidebar{
+  display:flex;
+  overflow-x:auto;
+  gap:5px
+ }
+
  .sideTitle{display:none}
- .sideBtn{white-space:nowrap;width:auto;margin:0}
- .stats{grid-template-columns:repeat(2,1fr)}
+
+ .sideBtn{
+  white-space:nowrap;
+  width:auto;
+  margin:0
+ }
+
+ .stats{
+  grid-template-columns:repeat(2,1fr)
+ }
 }
+
 @media(max-width:600px){
- .grid{grid-template-columns:1fr}
- .full{grid-column:auto}
- .stats{grid-template-columns:1fr 1fr}
- .adminEmail{display:none}
- .container{padding:15px}
- .item{align-items:flex-start;flex-direction:column}
+ .grid{
+  grid-template-columns:1fr
+ }
+
+ .full{
+  grid-column:auto
+ }
+
+ .adminEmail{
+  display:none
+ }
+
+ .container{
+  padding:15px
+ }
+
+ .item{
+  align-items:flex-start;
+  flex-direction:column
+ }
+
+ .itemActions{
+  width:100%
+ }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+
 <section id="loginPage">
+
 <div class="loginBox">
- <div class="logo">KOMA <span>STAR</span></div>
- <div class="subtitle">Admin Panel</div>
 
- <div class="field">
-  <label>Email</label>
-  <input id="loginEmail" type="email" placeholder="Admin email">
- </div>
+<div class="logo">
+KOMA <span>STAR</span>
+</div>
 
- <div class="field">
-  <label>Password</label>
-  <input id="loginPassword" type="password" placeholder="Admin password">
- </div>
+<div class="subtitle">
+Admin Panel
+</div>
 
- <button class="primaryBtn" onclick="login()">Login</button>
- <div id="loginError" class="error"></div>
+<div class="field">
+<label>Email</label>
+<input
+ id="loginEmail"
+ type="email"
+ autocomplete="username"
+ placeholder="Admin email">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input
+ id="loginPassword"
+ type="password"
+ autocomplete="current-password"
+ placeholder="Firebase password">
+</div>
+
+<button
+ id="loginButton"
+ class="primaryBtn"
+ onclick="login()">
+Login
+</button>
+
+<div id="loginError" class="error"></div>
+
 </div>
 </section>
 
 
+<!-- ADMIN -->
+
 <section id="adminPage" class="hidden">
 
 <header class="topbar">
- <div class="brand">KOMA <span>STAR</span> ADMIN</div>
- <div>
-  <span id="adminEmail" class="adminEmail"></span>
-  <button class="logoutBtn" onclick="logout()">Logout</button>
- </div>
+
+<div class="brand">
+KOMA <span>STAR</span> ADMIN
+</div>
+
+<div>
+<span id="adminEmail" class="adminEmail"></span>
+
+<button
+ class="logoutBtn"
+ onclick="logout()">
+Logout
+</button>
+
+</div>
 </header>
 
+
 <div class="container">
+
 <div class="dashboard">
 
+<!-- SIDEBAR -->
+
 <aside class="sidebar">
- <div class="sideTitle">Management</div>
- <button class="sideBtn active" onclick="showSection('movies')">🎬 Movies</button>
- <button class="sideBtn" onclick="showSection('series')">📺 Series</button>
- <button class="sideBtn" onclick="comingSoon('Reality')">⭐ Reality</button>
- <button class="sideBtn" onclick="comingSoon('Live TV')">🔴 Live TV</button>
- <button class="sideBtn" onclick="comingSoon('Users')">👤 Users</button>
- <button class="sideBtn" onclick="comingSoon('Settings')">⚙️ Settings</button>
+
+<div class="sideTitle">
+Management
+</div>
+
+<button
+ class="sideBtn active"
+ onclick="showSection('movies')">
+🎬 Movies
+</button>
+
+<button
+ class="sideBtn"
+ onclick="showSection('series')">
+📺 Series
+</button>
+
+<button
+ class="sideBtn"
+ onclick="comingSoon('Reality')">
+⭐ Reality
+</button>
+
+<button
+ class="sideBtn"
+ onclick="comingSoon('Live TV')">
+🔴 Live TV
+</button>
+
+<button
+ class="sideBtn"
+ onclick="comingSoon('Users')">
+👤 Users
+</button>
+
+<button
+ class="sideBtn"
+ onclick="comingSoon('Settings')">
+⚙️ Settings
+</button>
+
 </aside>
 
 
 <main class="main">
 
+
+<!-- MOVIES -->
+
 <div id="moviesSection">
 
-<h1 class="pageTitle">Movie Management</h1>
-<p class="pageDesc">Add and manage Koma Star movies.</p>
+<h1 class="pageTitle">
+Movie Management
+</h1>
+
+<p class="pageDesc">
+Add and manage Koma Star movies and cartoons.
+</p>
+
 
 <div class="stats">
- <div class="stat"><small>Total Movies</small><strong id="movieCount">0</strong></div>
- <div class="stat"><small>Total Series</small><strong id="seriesCount1">0</strong></div>
- <div class="stat"><small>Total Episodes</small><strong id="episodeCount1">0</strong></div>
- <div class="stat"><small>Database</small><strong>Firestore</strong></div>
+
+<div class="stat">
+<small>Total Movies</small>
+<strong id="movieCount">0</strong>
 </div>
 
+<div class="stat">
+<small>Total Series</small>
+<strong id="seriesCount1">0</strong>
+</div>
+
+<div class="stat">
+<small>Total Episodes</small>
+<strong id="episodeCount1">0</strong>
+</div>
+
+<div class="stat">
+<small>Database</small>
+<strong>Firestore</strong>
+</div>
+
+</div>
+
+
 <div class="panel">
-<div class="panelTitle">Add New Movie</div>
+
+<div class="panelTitle">
+Add New Movie / Cartoon
+</div>
+
 
 <div class="grid">
 
+
 <div class="field">
-<label>Movie Title</label>
-<input id="title" type="text" placeholder="Movie title">
+<label>Title</label>
+<input
+ id="title"
+ type="text"
+ placeholder="Movie or Cartoon title">
 </div>
+
 
 <div class="field">
 <label>Genre</label>
+
 <select id="genre">
+
 <option>Action</option>
+<option>Animation</option>
+<option>Cartoon</option>
 <option>Drama</option>
 <option>Comedy</option>
 <option>Romance</option>
@@ -254,78 +645,183 @@ button{cursor:pointer}
 <option>Sci-Fi</option>
 <option>Family</option>
 <option>Adventure</option>
+
 </select>
+
 </div>
 
+
 <div class="field full">
+
 <label>Description</label>
-<textarea id="description" placeholder="Movie description"></textarea>
+
+<textarea
+ id="description"
+ placeholder="Description"></textarea>
+
 </div>
 
+
 <div class="field">
+
 <label>Year</label>
-<input id="year" type="number" placeholder="2026">
+
+<input
+ id="year"
+ type="number"
+ placeholder="2026">
+
 </div>
+
 
 <div class="field">
+
 <label>Rating</label>
-<input id="rating" type="number" step="0.1" min="0" max="10" placeholder="8.5">
+
+<input
+ id="rating"
+ type="number"
+ step="0.1"
+ min="0"
+ max="10"
+ placeholder="8.5">
+
 </div>
 
+
 <div class="field full">
+
 <label>Poster URL</label>
-<input id="posterUrl" type="url" placeholder="https://example.com/poster.jpg">
+
+<input
+ id="posterUrl"
+ type="url"
+ placeholder="https://example.com/poster.jpg">
+
 </div>
 
+
 <div class="field full">
+
 <label>Video URL</label>
-<input id="videoUrl" type="url" placeholder="https://example.com/movie.mp4">
+
+<input
+ id="videoUrl"
+ type="url"
+ placeholder="https://example.com/video.mp4">
+
 </div>
+
 
 <div class="full">
-<button class="publishBtn" onclick="publishMovie()">🚀 Publish Movie</button>
-<div id="publishMessage" class="message"></div>
+
+<button
+ class="publishBtn"
+ onclick="publishMovie()">
+🚀 Publish Movie
+</button>
+
+<div
+ id="publishMessage"
+ class="message">
+</div>
+
 </div>
 
 </div>
 </div>
+
 
 <div class="panel">
-<div class="panelTitle">Published Movies</div>
-<div id="movieList" class="movieList">
-<div class="empty">Loading movies...</div>
+
+<div class="panelTitle">
+Published Movies / Cartoons
 </div>
+
+<div
+ id="movieList"
+ class="movieList">
+
+<div class="empty">
+Loading movies...
 </div>
 
 </div>
 
+</div>
+
+</div>
+
+
+<!-- SERIES -->
 
 <div id="seriesSection" class="hidden">
 
-<h1 class="pageTitle">Series Management</h1>
-<p class="pageDesc">Create series, seasons and episodes.</p>
+<h1 class="pageTitle">
+Series Management
+</h1>
+
+<p class="pageDesc">
+Create web series, cartoon series, seasons and episodes.
+</p>
+
 
 <div class="stats">
- <div class="stat"><small>Total Movies</small><strong id="movieCount2">0</strong></div>
- <div class="stat"><small>Total Series</small><strong id="seriesCount2">0</strong></div>
- <div class="stat"><small>Total Episodes</small><strong id="episodeCount2">0</strong></div>
- <div class="stat"><small>Database</small><strong>Firestore</strong></div>
+
+<div class="stat">
+<small>Total Movies</small>
+<strong id="movieCount2">0</strong>
 </div>
 
+<div class="stat">
+<small>Total Series</small>
+<strong id="seriesCount2">0</strong>
+</div>
+
+<div class="stat">
+<small>Total Episodes</small>
+<strong id="episodeCount2">0</strong>
+</div>
+
+<div class="stat">
+<small>Database</small>
+<strong>Firestore</strong>
+</div>
+
+</div>
+
+
 <div class="panel">
-<div class="panelTitle">Add New Web Series</div>
+
+<div class="panelTitle">
+Add New Web Series / Cartoon Series
+</div>
+
 
 <div class="grid">
 
-<div class="field">
-<label>Series Title</label>
-<input id="seriesTitle" type="text" placeholder="Dream City">
-</div>
 
 <div class="field">
+
+<label>Series Title</label>
+
+<input
+ id="seriesTitle"
+ type="text"
+ placeholder="Dream City">
+
+</div>
+
+
+<div class="field">
+
 <label>Genre</label>
+
 <select id="seriesGenre">
+
 <option>Drama</option>
+<option>Animation</option>
+<option>Cartoon</option>
 <option>Action</option>
 <option>Comedy</option>
 <option>Thriller</option>
@@ -333,85 +829,181 @@ button{cursor:pointer}
 <option>Horror</option>
 <option>Sci-Fi</option>
 <option>Family</option>
+
 </select>
+
 </div>
 
+
 <div class="field full">
+
 <label>Description</label>
-<textarea id="seriesDescription" placeholder="Series description"></textarea>
+
+<textarea
+ id="seriesDescription"
+ placeholder="Series description"></textarea>
+
 </div>
 
+
 <div class="field">
+
 <label>Year</label>
-<input id="seriesYear" type="number" placeholder="2026">
+
+<input
+ id="seriesYear"
+ type="number"
+ placeholder="2026">
+
 </div>
 
+
 <div class="field">
+
 <label>Rating</label>
-<input id="seriesRating" type="number" step="0.1" min="0" max="10" placeholder="8.5">
+
+<input
+ id="seriesRating"
+ type="number"
+ step="0.1"
+ min="0"
+ max="10"
+ placeholder="8.5">
+
 </div>
+
 
 <div class="field full">
+
 <label>Poster URL</label>
-<input id="seriesPoster" type="url" placeholder="https://example.com/poster.jpg">
+
+<input
+ id="seriesPoster"
+ type="url"
+ placeholder="https://example.com/poster.jpg">
+
 </div>
+
 
 <div class="full">
-<button class="publishBtn" onclick="publishSeries()">📺 Publish Series</button>
-<div id="seriesMessage" class="message"></div>
+
+<button
+ class="publishBtn"
+ onclick="publishSeries()">
+📺 Publish Series
+</button>
+
+<div
+ id="seriesMessage"
+ class="message">
+</div>
+
 </div>
 
 </div>
 </div>
+
 
 <div class="panel">
-<div class="panelTitle">Published Web Series</div>
-<div id="seriesList" class="seriesList">
-<div class="empty">Loading series...</div>
+
+<div class="panelTitle">
+Published Web Series
 </div>
+
+<div
+ id="seriesList"
+ class="seriesList">
+
+<div class="empty">
+Loading series...
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 </main>
+
 </div>
 </div>
+
 </section>
 
 
-<!-- EPISODE MODAL -->
-<div id="episodeModal" class="modal hidden">
+<!-- SEASON MODAL -->
+
+<div
+ id="episodeModal"
+ class="modal hidden">
 
 <div class="modalBox">
 
 <div class="modalHeader">
-<h2 id="episodeModalTitle">Manage Episodes</h2>
-<button class="closeBtn" onclick="closeEpisodeModal()">Close</button>
+
+<h2 id="episodeModalTitle">
+Manage Episodes
+</h2>
+
+<button
+ class="closeBtn"
+ onclick="closeEpisodeModal()">
+Close
+</button>
+
 </div>
+
 
 <div class="panel">
 
-<div class="panelTitle">Add Season</div>
+<div class="panelTitle">
+Add Season
+</div>
+
 
 <div class="grid">
 
-<div class="field">
-<label>Season Number</label>
-<input id="seasonNumber" type="number" min="1" placeholder="1">
-</div>
 
 <div class="field">
-<label>Season Name</label>
-<input id="seasonName" type="text" placeholder="Season 1">
+
+<label>Season Number</label>
+
+<input
+ id="seasonNumber"
+ type="number"
+ min="1"
+ placeholder="1">
+
 </div>
+
+
+<div class="field">
+
+<label>Season Name</label>
+
+<input
+ id="seasonName"
+ type="text"
+ placeholder="Season 1">
+
+</div>
+
 
 <div class="full">
-<button class="publishBtn" onclick="addSeason()">➕ Add Season</button>
-</div>
+
+<button
+ class="publishBtn"
+ onclick="addSeason()">
+➕ Add Season
+</button>
 
 </div>
 
 </div>
+
+</div>
+
 
 <div id="seasonList"></div>
 
@@ -419,54 +1011,116 @@ button{cursor:pointer}
 </div>
 
 
-<!-- EPISODE FORM MODAL -->
-<div id="addEpisodeModal" class="modal hidden">
+<!-- EPISODE MODAL -->
+
+<div
+ id="addEpisodeModal"
+ class="modal hidden">
 
 <div class="modalBox">
 
 <div class="modalHeader">
-<h2 id="addEpisodeTitle">Add Episode</h2>
-<button class="closeBtn" onclick="closeAddEpisode()">Close</button>
+
+<h2 id="addEpisodeTitle">
+Add Episode
+</h2>
+
+<button
+ class="closeBtn"
+ onclick="closeAddEpisode()">
+Close
+</button>
+
 </div>
+
 
 <div class="grid">
 
+
 <div class="field">
+
 <label>Episode Number</label>
-<input id="episodeNumber" type="number" min="1" placeholder="1">
+
+<input
+ id="episodeNumber"
+ type="number"
+ min="1"
+ placeholder="1">
+
 </div>
+
 
 <div class="field">
+
 <label>Episode Title</label>
-<input id="episodeTitle" type="text" placeholder="Episode 1">
+
+<input
+ id="episodeTitle"
+ type="text"
+ placeholder="Episode 1">
+
 </div>
 
+
 <div class="field full">
+
 <label>Description</label>
-<textarea id="episodeDescription" placeholder="Episode description"></textarea>
+
+<textarea
+ id="episodeDescription"
+ placeholder="Episode description"></textarea>
+
 </div>
 
+
 <div class="field full">
+
 <label>Video URL</label>
-<input id="episodeVideo" type="url" placeholder="https://example.com/episode1.mp4">
+
+<input
+ id="episodeVideo"
+ type="url"
+ placeholder="https://example.com/episode1.mp4">
+
 </div>
 
+
 <div class="field full">
+
 <label>Episode Thumbnail URL</label>
-<input id="episodePoster" type="url" placeholder="https://example.com/episode1.jpg">
+
+<input
+ id="episodePoster"
+ type="url"
+ placeholder="https://example.com/episode1.jpg">
+
 </div>
+
 
 <div class="full">
-<button class="publishBtn" onclick="publishEpisode()">🚀 Publish Episode</button>
-<div id="episodeMessage" class="message"></div>
+
+<button
+ class="publishBtn"
+ onclick="publishEpisode()">
+🚀 Publish Episode
+</button>
+
+<div
+ id="episodeMessage"
+ class="message">
 </div>
 
 </div>
+
+</div>
+
 </div>
 </div>
 
 
 <script>
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
  apiKey:"AIzaSyD9Qt5x69KsB3VxOuvTbrDXYJHF3nN5acs",
@@ -478,12 +1132,19 @@ const firebaseConfig = {
  measurementId:"G-HYF2PZY5GR"
 };
 
+
+/* FIREBASE */
+
 firebase.initializeApp(firebaseConfig);
 
 const auth=firebase.auth();
 const db=firebase.firestore();
 
-const ADMIN_UID="CQ6K8x635TfiWsGkRIdoPhEgkDV2";
+
+/* IMPORTANT: NEW ADMIN UID */
+
+const ADMIN_UID="TrobLBGSgTYKjGwJVQu2eEi6aVQ2";
+
 
 let currentSeriesId=null;
 let currentSeriesTitle="";
@@ -491,7 +1152,7 @@ let currentSeasonId=null;
 let currentSeasonNumber=null;
 
 
-/* AUTH */
+/* AUTH STATE */
 
 auth.onAuthStateChanged(async user=>{
 
@@ -500,13 +1161,27 @@ auth.onAuthStateChanged(async user=>{
   if(user.uid!==ADMIN_UID){
 
    await auth.signOut();
-   showLoginError("This account is not authorized.");
+
+   showLoginError(
+    "This Firebase account is not authorized as Admin."
+   );
+
    return;
   }
 
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("adminPage").classList.remove("hidden");
-  document.getElementById("adminEmail").textContent=user.email||"";
+
+  document
+   .getElementById("loginPage")
+   .classList.add("hidden");
+
+  document
+   .getElementById("adminPage")
+   .classList.remove("hidden");
+
+
+  document.getElementById("adminEmail").textContent=
+   user.email||"";
+
 
   loadMovies();
   loadSeries();
@@ -514,46 +1189,139 @@ auth.onAuthStateChanged(async user=>{
 
  }else{
 
-  document.getElementById("loginPage").classList.remove("hidden");
-  document.getElementById("adminPage").classList.add("hidden");
+  document
+   .getElementById("loginPage")
+   .classList.remove("hidden");
+
+  document
+   .getElementById("adminPage")
+   .classList.add("hidden");
 
  }
 
 });
 
 
+/* LOGIN */
+
 async function login(){
 
- const email=document.getElementById("loginEmail").value.trim();
- const password=document.getElementById("loginPassword").value;
+ const email=
+  document.getElementById("loginEmail").value.trim();
+
+ const password=
+  document.getElementById("loginPassword").value;
+
+ const button=
+  document.getElementById("loginButton");
+
+
+ document.getElementById("loginError").textContent="";
+
 
  if(!email||!password){
-  showLoginError("Enter email and password.");
+
+  showLoginError(
+   "Please enter your email and password."
+  );
+
   return;
  }
 
+
+ button.disabled=true;
+ button.textContent="Signing in...";
+
+
  try{
 
-  const result=await auth.signInWithEmailAndPassword(email,password);
+  const result=
+   await auth.signInWithEmailAndPassword(
+    email,
+    password
+   );
+
 
   if(result.user.uid!==ADMIN_UID){
+
    await auth.signOut();
-   showLoginError("This account is not authorized.");
+
+   showLoginError(
+    "Login successful, but this account is not the Koma Star Admin account."
+   );
+
+   return;
   }
 
+
  }catch(error){
-  showLoginError(error.message);
+
+  console.error(error);
+
+  let message="Login failed.";
+
+  if(
+   error.code==="auth/invalid-credential" ||
+   error.code==="auth/invalid-login-credentials"
+  ){
+
+   message=
+    "Email or password is incorrect. Use the Firebase Authentication password, not your Gmail password.";
+
+  }else if(error.code==="auth/user-not-found"){
+
+   message="No Firebase account exists with this email.";
+
+  }else if(error.code==="auth/wrong-password"){
+
+   message=
+    "The Firebase password is incorrect.";
+
+  }else if(error.code==="auth/invalid-email"){
+
+   message="Please enter a valid email address.";
+
+  }else if(error.code==="auth/too-many-requests"){
+
+   message=
+    "Too many login attempts. Please wait and try again.";
+
+  }else{
+
+   message=error.message;
+  }
+
+
+  showLoginError(message);
+
+ }finally{
+
+  button.disabled=false;
+  button.textContent="Login";
+
  }
+
 }
 
 
 async function logout(){
- await auth.signOut();
+
+ try{
+  await auth.signOut();
+ }catch(error){
+  console.error(error);
+ }
+
 }
 
 
+/* LOGIN ERROR */
+
 function showLoginError(message){
- document.getElementById("loginError").textContent=message;
+
+ document.getElementById("loginError").textContent=
+  message;
+
 }
 
 
@@ -561,49 +1329,100 @@ function showLoginError(message){
 
 function showSection(section){
 
- document.getElementById("moviesSection").classList.add("hidden");
- document.getElementById("seriesSection").classList.add("hidden");
+ document
+  .getElementById("moviesSection")
+  .classList.add("hidden");
 
- document.querySelectorAll(".sideBtn").forEach(x=>x.classList.remove("active"));
+ document
+  .getElementById("seriesSection")
+  .classList.add("hidden");
+
+
+ document
+  .querySelectorAll(".sideBtn")
+  .forEach(x=>x.classList.remove("active"));
+
 
  if(section==="movies"){
-  document.getElementById("moviesSection").classList.remove("hidden");
-  document.querySelectorAll(".sideBtn")[0].classList.add("active");
+
+  document
+   .getElementById("moviesSection")
+   .classList.remove("hidden");
+
+  document
+   .querySelectorAll(".sideBtn")[0]
+   .classList.add("active");
+
  }
 
+
  if(section==="series"){
-  document.getElementById("seriesSection").classList.remove("hidden");
-  document.querySelectorAll(".sideBtn")[1].classList.add("active");
+
+  document
+   .getElementById("seriesSection")
+   .classList.remove("hidden");
+
+  document
+   .querySelectorAll(".sideBtn")[1]
+   .classList.add("active");
+
  }
 
 }
 
 
-/* MOVIES */
+/* MOVIE PUBLISH */
 
 async function publishMovie(){
 
- const title=document.getElementById("title").value.trim();
- const genre=document.getElementById("genre").value;
- const description=document.getElementById("description").value.trim();
- const year=document.getElementById("year").value;
- const rating=document.getElementById("rating").value;
- const posterUrl=document.getElementById("posterUrl").value.trim();
- const videoUrl=document.getElementById("videoUrl").value.trim();
+ const title=
+  document.getElementById("title").value.trim();
+
+ const genre=
+  document.getElementById("genre").value;
+
+ const description=
+  document.getElementById("description").value.trim();
+
+ const year=
+  document.getElementById("year").value;
+
+ const rating=
+  document.getElementById("rating").value;
+
+ const posterUrl=
+  document.getElementById("posterUrl").value.trim();
+
+ const videoUrl=
+  document.getElementById("videoUrl").value.trim();
+
 
  if(!title||!description||!year||!videoUrl){
-  showMovieMessage("Please fill the required fields.",true);
+
+  showMovieMessage(
+   "Please fill Title, Description, Year and Video URL.",
+   true
+  );
+
   return;
  }
+
 
  try{
 
   const user=auth.currentUser;
 
+
   if(!user||user.uid!==ADMIN_UID){
-   showMovieMessage("Admin authentication required.",true);
+
+   showMovieMessage(
+    "Admin authentication required.",
+    true
+   );
+
    return;
   }
+
 
   await db.collection("movies").add({
 
@@ -615,10 +1434,12 @@ async function publishMovie(){
    posterUrl:posterUrl,
    videoUrl:videoUrl,
    published:true,
-   createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+   createdAt:
+    firebase.firestore.FieldValue.serverTimestamp(),
    createdBy:user.uid
 
   });
+
 
   document.getElementById("title").value="";
   document.getElementById("description").value="";
@@ -627,79 +1448,152 @@ async function publishMovie(){
   document.getElementById("posterUrl").value="";
   document.getElementById("videoUrl").value="";
 
-  showMovieMessage("Movie published successfully!");
+
+  showMovieMessage(
+   "Movie / Cartoon published successfully!"
+  );
+
+
   loadMovies();
   updateStats();
 
  }catch(error){
-  showMovieMessage(error.message,true);
+
+  console.error(error);
+
+  showMovieMessage(
+   error.message,
+   true
+  );
+
  }
+
 }
 
 
 function showMovieMessage(message,error=false){
- const box=document.getElementById("publishMessage");
+
+ const box=
+  document.getElementById("publishMessage");
+
  box.textContent=message;
- box.style.color=error?"#ff657f":"#8cffae";
+
+ box.style.color=
+  error?"#ff657f":"#8cffae";
+
 }
 
 
+/* LOAD MOVIES */
+
 async function loadMovies(){
 
- const list=document.getElementById("movieList");
+ const list=
+  document.getElementById("movieList");
+
 
  try{
 
-  const snapshot=await db.collection("movies").get();
+  const snapshot=
+   await db.collection("movies").get();
+
 
   if(snapshot.empty){
-   list.innerHTML='<div class="empty">No movies found.</div>';
+
+   list.innerHTML=
+    '<div class="empty">No movies found.</div>';
+
    return;
   }
 
+
   const movies=[];
 
+
   snapshot.forEach(doc=>{
-   movies.push({id:doc.id,...doc.data()});
+
+   movies.push({
+    id:doc.id,
+    ...doc.data()
+   });
+
   });
+
 
   movies.sort((a,b)=>{
 
-   const aTime=a.createdAt?.toMillis?a.createdAt.toMillis():0;
-   const bTime=b.createdAt?.toMillis?b.createdAt.toMillis():0;
+   const aTime=
+    a.createdAt?.toMillis?
+    a.createdAt.toMillis():0;
+
+   const bTime=
+    b.createdAt?.toMillis?
+    b.createdAt.toMillis():0;
 
    return bTime-aTime;
+
   });
+
 
   list.innerHTML="";
 
+
   movies.forEach(movie=>{
 
-   const item=document.createElement("div");
+   const item=
+    document.createElement("div");
+
    item.className="item";
 
-   const info=document.createElement("div");
+
+   const info=
+    document.createElement("div");
+
    info.className="itemInfo";
 
-   const title=document.createElement("div");
-   title.className="itemTitle";
-   title.textContent=movie.title||"Untitled";
 
-   const meta=document.createElement("div");
+   const title=
+    document.createElement("div");
+
+   title.className="itemTitle";
+
+   title.textContent=
+    movie.title||"Untitled";
+
+
+   const meta=
+    document.createElement("div");
+
    meta.className="itemMeta";
+
    meta.textContent=
     `${movie.genre||"Unknown"} • ${movie.year||"-"} • Rating ${movie.rating||0}`;
+
 
    info.appendChild(title);
    info.appendChild(meta);
 
-   const actions=document.createElement("div");
+
+   const actions=
+    document.createElement("div");
+
    actions.className="itemActions";
 
-   const del=document.createElement("button");
+
+   const del=
+    document.createElement("button");
+
    del.className="deleteBtn";
+
    del.textContent="Delete";
-   del.onclick=()=>deleteMovie(movie.id,movie.title);
+
+   del.onclick=()=>{
+    deleteMovie(
+     movie.id,
+     movie.title
+    );
+   };
+
 
    actions.appendChild(del);
 
@@ -710,62 +1604,113 @@ async function loadMovies(){
 
   });
 
+
  }catch(error){
 
-  list.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  console.error(error);
+
+  list.innerHTML=
+   `<div class="empty">
+   ${escapeHtml(error.message)}
+   </div>`;
 
  }
+
 }
 
+
+/* DELETE MOVIE */
 
 async function deleteMovie(id,title){
 
  const user=auth.currentUser;
 
+
  if(!user||user.uid!==ADMIN_UID){
+
   alert("Admin authentication required.");
+
   return;
  }
 
- if(!confirm(`Delete "${title||"this movie"}"?`))return;
+
+ if(
+  !confirm(
+   `Delete "${title||"this movie"}"?`
+  )
+ )return;
+
 
  try{
 
-  await db.collection("movies").doc(id).delete();
+  await db
+   .collection("movies")
+   .doc(id)
+   .delete();
+
 
   loadMovies();
   updateStats();
 
+
  }catch(error){
+
   alert(error.message);
+
  }
+
 }
 
 
-/* SERIES */
+/* SERIES PUBLISH */
 
 async function publishSeries(){
 
- const title=document.getElementById("seriesTitle").value.trim();
- const genre=document.getElementById("seriesGenre").value;
- const description=document.getElementById("seriesDescription").value.trim();
- const year=document.getElementById("seriesYear").value;
- const rating=document.getElementById("seriesRating").value;
- const posterUrl=document.getElementById("seriesPoster").value.trim();
+ const title=
+  document.getElementById("seriesTitle").value.trim();
+
+ const genre=
+  document.getElementById("seriesGenre").value;
+
+ const description=
+  document.getElementById("seriesDescription").value.trim();
+
+ const year=
+  document.getElementById("seriesYear").value;
+
+ const rating=
+  document.getElementById("seriesRating").value;
+
+ const posterUrl=
+  document.getElementById("seriesPoster").value.trim();
+
 
  if(!title||!description||!year){
-  showSeriesMessage("Please fill the required fields.",true);
+
+  showSeriesMessage(
+   "Please fill Title, Description and Year.",
+   true
+  );
+
   return;
  }
+
 
  try{
 
   const user=auth.currentUser;
 
+
   if(!user||user.uid!==ADMIN_UID){
-   showSeriesMessage("Admin authentication required.",true);
+
+   showSeriesMessage(
+    "Admin authentication required.",
+    true
+   );
+
    return;
   }
+
 
   await db.collection("series").add({
 
@@ -776,10 +1721,12 @@ async function publishSeries(){
    rating:rating?Number(rating):0,
    posterUrl:posterUrl,
    published:true,
-   createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+   createdAt:
+    firebase.firestore.FieldValue.serverTimestamp(),
    createdBy:user.uid
 
   });
+
 
   document.getElementById("seriesTitle").value="";
   document.getElementById("seriesDescription").value="";
@@ -787,84 +1734,173 @@ async function publishSeries(){
   document.getElementById("seriesRating").value="";
   document.getElementById("seriesPoster").value="";
 
-  showSeriesMessage("Series published successfully!");
+
+  showSeriesMessage(
+   "Series published successfully!"
+  );
+
+
   loadSeries();
   updateStats();
 
+
  }catch(error){
-  showSeriesMessage(error.message,true);
+
+  console.error(error);
+
+  showSeriesMessage(
+   error.message,
+   true
+  );
+
  }
+
 }
 
 
 function showSeriesMessage(message,error=false){
- const box=document.getElementById("seriesMessage");
+
+ const box=
+  document.getElementById("seriesMessage");
+
  box.textContent=message;
- box.style.color=error?"#ff657f":"#8cffae";
+
+ box.style.color=
+  error?"#ff657f":"#8cffae";
+
 }
 
 
+/* LOAD SERIES */
+
 async function loadSeries(){
 
- const list=document.getElementById("seriesList");
+ const list=
+  document.getElementById("seriesList");
+
 
  try{
 
-  const snapshot=await db.collection("series").get();
+  const snapshot=
+   await db.collection("series").get();
+
 
   if(snapshot.empty){
-   list.innerHTML='<div class="empty">No series found.</div>';
+
+   list.innerHTML=
+    '<div class="empty">No series found.</div>';
+
    return;
   }
 
+
   const series=[];
 
+
   snapshot.forEach(doc=>{
-   series.push({id:doc.id,...doc.data()});
+
+   series.push({
+    id:doc.id,
+    ...doc.data()
+   });
+
   });
+
 
   series.sort((a,b)=>{
 
-   const aTime=a.createdAt?.toMillis?a.createdAt.toMillis():0;
-   const bTime=b.createdAt?.toMillis?b.createdAt.toMillis():0;
+   const aTime=
+    a.createdAt?.toMillis?
+    a.createdAt.toMillis():0;
+
+   const bTime=
+    b.createdAt?.toMillis?
+    b.createdAt.toMillis():0;
 
    return bTime-aTime;
+
   });
+
 
   list.innerHTML="";
 
+
   for(const itemData of series){
 
-   const item=document.createElement("div");
+   const item=
+    document.createElement("div");
+
    item.className="item";
 
-   const info=document.createElement("div");
+
+   const info=
+    document.createElement("div");
+
    info.className="itemInfo";
 
-   const title=document.createElement("div");
-   title.className="itemTitle";
-   title.textContent=itemData.title||"Untitled Series";
 
-   const meta=document.createElement("div");
+   const title=
+    document.createElement("div");
+
+   title.className="itemTitle";
+
+   title.textContent=
+    itemData.title||"Untitled Series";
+
+
+   const meta=
+    document.createElement("div");
+
    meta.className="itemMeta";
+
    meta.textContent=
     `${itemData.genre||"Unknown"} • ${itemData.year||"-"} • Rating ${itemData.rating||0}`;
+
 
    info.appendChild(title);
    info.appendChild(meta);
 
-   const actions=document.createElement("div");
+
+   const actions=
+    document.createElement("div");
+
    actions.className="itemActions";
 
-   const manage=document.createElement("button");
-   manage.className="openBtn";
-   manage.textContent="Seasons & Episodes";
-   manage.onclick=()=>openEpisodeManager(itemData.id,itemData.title);
 
-   const del=document.createElement("button");
+   const manage=
+    document.createElement("button");
+
+   manage.className="openBtn";
+
+   manage.textContent=
+    "Seasons & Episodes";
+
+   manage.onclick=()=>{
+
+    openEpisodeManager(
+     itemData.id,
+     itemData.title
+    );
+
+   };
+
+
+   const del=
+    document.createElement("button");
+
    del.className="deleteBtn";
+
    del.textContent="Delete";
-   del.onclick=()=>deleteSeries(itemData.id,itemData.title);
+
+   del.onclick=()=>{
+
+    deleteSeries(
+     itemData.id,
+     itemData.title
+    );
+
+   };
+
 
    actions.appendChild(manage);
    actions.appendChild(del);
@@ -873,160 +1909,301 @@ async function loadSeries(){
    item.appendChild(actions);
 
    list.appendChild(item);
+
   }
+
 
  }catch(error){
 
-  list.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  console.error(error);
+
+  list.innerHTML=
+   `<div class="empty">
+   ${escapeHtml(error.message)}
+   </div>`;
 
  }
+
 }
 
 
+/* DELETE SERIES */
+
 async function deleteSeries(id,title){
 
- if(!confirm(`Delete "${title||"this series"}"?`))return;
+ const user=auth.currentUser;
+
+
+ if(!user||user.uid!==ADMIN_UID){
+
+  alert("Admin authentication required.");
+
+  return;
+ }
+
+
+ if(
+  !confirm(
+   `Delete "${title||"this series"}"?`
+  )
+ )return;
+
 
  try{
 
-  await db.collection("series").doc(id).delete();
+  await db
+   .collection("series")
+   .doc(id)
+   .delete();
+
 
   loadSeries();
   updateStats();
 
+
  }catch(error){
+
   alert(error.message);
+
  }
+
 }
 
 
-/* SEASON + EPISODES */
+/* EPISODE MANAGER */
 
-async function openEpisodeManager(seriesId,seriesTitle){
+async function openEpisodeManager(
+ seriesId,
+ seriesTitle
+){
 
  currentSeriesId=seriesId;
- currentSeriesTitle=seriesTitle||"Series";
+ currentSeriesTitle=
+  seriesTitle||"Series";
 
- document.getElementById("episodeModalTitle").textContent=
-  currentSeriesTitle+" — Seasons & Episodes";
 
- document.getElementById("episodeModal").classList.remove("hidden");
+ document
+  .getElementById("episodeModalTitle")
+  .textContent=
+   currentSeriesTitle+
+   " — Seasons & Episodes";
+
+
+ document
+  .getElementById("episodeModal")
+  .classList.remove("hidden");
+
 
  loadSeasons();
+
 }
 
 
 function closeEpisodeModal(){
- document.getElementById("episodeModal").classList.add("hidden");
+
+ document
+  .getElementById("episodeModal")
+  .classList.add("hidden");
+
 }
 
 
+/* ADD SEASON */
+
 async function addSeason(){
 
- const number=Number(document.getElementById("seasonNumber").value);
- const name=document.getElementById("seasonName").value.trim();
+ const number=
+  Number(
+   document.getElementById("seasonNumber").value
+  );
+
+ const name=
+  document.getElementById("seasonName").value.trim();
+
 
  if(!number){
+
   alert("Enter season number.");
+
   return;
  }
 
+
  if(!currentSeriesId){
+
   alert("Series not selected.");
+
   return;
  }
+
 
  try{
 
   const user=auth.currentUser;
 
-  await db.collection("series")
+
+  if(!user||user.uid!==ADMIN_UID){
+
+   alert("Admin authentication required.");
+
+   return;
+  }
+
+
+  await db
+   .collection("series")
    .doc(currentSeriesId)
    .collection("seasons")
    .add({
 
     seasonNumber:number,
-    name:name||`Season ${number}`,
-    createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+
+    name:
+     name||`Season ${number}`,
+
+    createdAt:
+     firebase.firestore.FieldValue.serverTimestamp(),
+
     createdBy:user.uid
 
    });
 
-  document.getElementById("seasonNumber").value="";
-  document.getElementById("seasonName").value="";
+
+  document.getElementById(
+   "seasonNumber"
+  ).value="";
+
+  document.getElementById(
+   "seasonName"
+  ).value="";
+
 
   loadSeasons();
   updateStats();
 
+
  }catch(error){
+
   alert(error.message);
+
  }
+
 }
 
 
+/* LOAD SEASONS */
+
 async function loadSeasons(){
 
- const list=document.getElementById("seasonList");
+ const list=
+  document.getElementById("seasonList");
 
- list.innerHTML='<div class="empty">Loading seasons...</div>';
+
+ list.innerHTML=
+  '<div class="loading">Loading seasons...</div>';
+
 
  try{
 
   const snapshot=
-   await db.collection("series")
-   .doc(currentSeriesId)
-   .collection("seasons")
-   .get();
+   await db
+    .collection("series")
+    .doc(currentSeriesId)
+    .collection("seasons")
+    .get();
+
 
   if(snapshot.empty){
 
-   list.innerHTML='<div class="empty">No seasons yet.</div>';
+   list.innerHTML=
+    '<div class="empty">No seasons yet. Add Season 1.</div>';
 
    return;
   }
 
+
   const seasons=[];
 
+
   snapshot.forEach(doc=>{
-   seasons.push({id:doc.id,...doc.data()});
+
+   seasons.push({
+    id:doc.id,
+    ...doc.data()
+   });
+
   });
 
+
   seasons.sort((a,b)=>
-   Number(a.seasonNumber||0)-Number(b.seasonNumber||0)
+   Number(a.seasonNumber||0)-
+   Number(b.seasonNumber||0)
   );
+
 
   list.innerHTML="";
 
+
   for(const season of seasons){
 
-   const box=document.createElement("div");
+   const box=
+    document.createElement("div");
+
    box.className="seasonBox";
 
-   const header=document.createElement("div");
+
+   const header=
+    document.createElement("div");
+
    header.className="seasonHeader";
 
-   const title=document.createElement("div");
+
+   const title=
+    document.createElement("div");
+
    title.className="seasonTitle";
+
    title.textContent=
     `${season.name||"Season "+season.seasonNumber}`;
 
-   const actions=document.createElement("div");
 
-   const add=document.createElement("button");
+   const actions=
+    document.createElement("div");
+
+
+   const add=
+    document.createElement("button");
+
    add.className="smallBtn";
+
    add.textContent="Add Episode";
+
    add.onclick=()=>{
+
     openAddEpisode(
      season.id,
      season.seasonNumber,
      season.name
     );
+
    };
 
-   const del=document.createElement("button");
+
+   const del=
+    document.createElement("button");
+
    del.className="deleteBtn";
+
    del.textContent="Delete Season";
-   del.onclick=()=>deleteSeason(season.id);
+
+   del.onclick=()=>{
+
+    deleteSeason(
+     season.id
+    );
+
+   };
+
 
    actions.appendChild(add);
    actions.appendChild(del);
@@ -1036,110 +2213,213 @@ async function loadSeasons(){
 
    box.appendChild(header);
 
-   const episodes=document.createElement("div");
-   episodes.id="episodes-"+season.id;
+
+   const episodes=
+    document.createElement("div");
+
+   episodes.id=
+    "episodes-"+season.id;
 
    episodes.innerHTML=
     '<div class="empty">Loading episodes...</div>';
+
 
    box.appendChild(episodes);
 
    list.appendChild(box);
 
-   loadEpisodes(season.id,episodes);
+
+   loadEpisodes(
+    season.id,
+    episodes
+   );
 
   }
+
 
  }catch(error){
 
   list.innerHTML=
-   `<div class="empty">${escapeHtml(error.message)}</div>`;
+   `<div class="empty">
+   ${escapeHtml(error.message)}
+   </div>`;
 
  }
+
 }
 
 
+/* DELETE SEASON */
+
 async function deleteSeason(seasonId){
 
- if(!confirm("Delete this season?"))return;
+ const user=auth.currentUser;
+
+
+ if(!user||user.uid!==ADMIN_UID){
+
+  alert("Admin authentication required.");
+
+  return;
+ }
+
+
+ if(!confirm("Delete this season and all episodes?"))
+  return;
+
 
  try{
 
   const seasonRef=
-   db.collection("series")
-   .doc(currentSeriesId)
-   .collection("seasons")
-   .doc(seasonId);
+   db
+    .collection("series")
+    .doc(currentSeriesId)
+    .collection("seasons")
+    .doc(seasonId);
+
 
   const episodes=
-   await seasonRef.collection("episodes").get();
+   await seasonRef
+    .collection("episodes")
+    .get();
+
 
   const batch=db.batch();
+
 
   episodes.forEach(doc=>{
    batch.delete(doc.ref);
   });
 
+
   batch.delete(seasonRef);
 
   await batch.commit();
 
+
   loadSeasons();
   updateStats();
 
+
  }catch(error){
+
   alert(error.message);
+
  }
+
 }
 
 
-function openAddEpisode(seasonId,seasonNumber,seasonName){
+/* ADD EPISODE */
+
+function openAddEpisode(
+ seasonId,
+ seasonNumber,
+ seasonName
+){
 
  currentSeasonId=seasonId;
  currentSeasonNumber=seasonNumber;
 
- document.getElementById("addEpisodeTitle").textContent=
-  `${currentSeriesTitle} — ${seasonName||"Season "+seasonNumber}`;
 
- document.getElementById("episodeNumber").value="";
- document.getElementById("episodeTitle").value="";
- document.getElementById("episodeDescription").value="";
- document.getElementById("episodeVideo").value="";
- document.getElementById("episodePoster").value="";
- document.getElementById("episodeMessage").textContent="";
+ document
+  .getElementById("addEpisodeTitle")
+  .textContent=
+   `${currentSeriesTitle} — ${seasonName||"Season "+seasonNumber}`;
 
- document.getElementById("addEpisodeModal").classList.remove("hidden");
+
+ document.getElementById(
+  "episodeNumber"
+ ).value="";
+
+ document.getElementById(
+  "episodeTitle"
+ ).value="";
+
+ document.getElementById(
+  "episodeDescription"
+ ).value="";
+
+ document.getElementById(
+  "episodeVideo"
+ ).value="";
+
+ document.getElementById(
+  "episodePoster"
+ ).value="";
+
+ document.getElementById(
+  "episodeMessage"
+ ).textContent="";
+
+
+ document
+  .getElementById("addEpisodeModal")
+  .classList.remove("hidden");
+
 }
 
 
 function closeAddEpisode(){
- document.getElementById("addEpisodeModal").classList.add("hidden");
+
+ document
+  .getElementById("addEpisodeModal")
+  .classList.add("hidden");
+
 }
 
 
+/* PUBLISH EPISODE */
+
 async function publishEpisode(){
 
- const number=Number(document.getElementById("episodeNumber").value);
- const title=document.getElementById("episodeTitle").value.trim();
- const description=document.getElementById("episodeDescription").value.trim();
- const video=document.getElementById("episodeVideo").value.trim();
- const poster=document.getElementById("episodePoster").value.trim();
+ const number=
+  Number(
+   document.getElementById("episodeNumber").value
+  );
+
+ const title=
+  document.getElementById("episodeTitle").value.trim();
+
+ const description=
+  document.getElementById("episodeDescription").value.trim();
+
+ const video=
+  document.getElementById("episodeVideo").value.trim();
+
+ const poster=
+  document.getElementById("episodePoster").value.trim();
+
 
  if(!number||!title||!video){
-  showEpisodeMessage("Episode number, title and video URL are required.",true);
+
+  showEpisodeMessage(
+   "Episode number, title and video URL are required.",
+   true
+  );
+
   return;
  }
+
 
  try{
 
   const user=auth.currentUser;
 
+
   if(!user||user.uid!==ADMIN_UID){
-   showEpisodeMessage("Admin authentication required.",true);
+
+   showEpisodeMessage(
+    "Admin authentication required.",
+    true
+   );
+
    return;
   }
 
-  await db.collection("series")
+
+  await db
+   .collection("series")
    .doc(currentSeriesId)
    .collection("seasons")
    .doc(currentSeasonId)
@@ -1147,56 +2427,112 @@ async function publishEpisode(){
    .add({
 
     episodeNumber:number,
+
     title:title,
+
     description:description,
+
     videoUrl:video,
+
     posterUrl:poster,
+
     published:true,
-    createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+
+    createdAt:
+     firebase.firestore.FieldValue.serverTimestamp(),
+
     createdBy:user.uid
 
    });
 
-  showEpisodeMessage("Episode published successfully!");
 
-  document.getElementById("episodeNumber").value="";
-  document.getElementById("episodeTitle").value="";
-  document.getElementById("episodeDescription").value="";
-  document.getElementById("episodeVideo").value="";
-  document.getElementById("episodePoster").value="";
+  showEpisodeMessage(
+   "Episode published successfully!"
+  );
+
+
+  document.getElementById(
+   "episodeNumber"
+  ).value="";
+
+  document.getElementById(
+   "episodeTitle"
+  ).value="";
+
+  document.getElementById(
+   "episodeDescription"
+  ).value="";
+
+  document.getElementById(
+   "episodeVideo"
+  ).value="";
+
+  document.getElementById(
+   "episodePoster"
+  ).value="";
+
 
   setTimeout(()=>{
+
    closeAddEpisode();
+
    loadSeasons();
+
    updateStats();
+
   },500);
 
+
  }catch(error){
-  showEpisodeMessage(error.message,true);
+
+  console.error(error);
+
+  showEpisodeMessage(
+   error.message,
+   true
+  );
+
  }
+
 }
 
 
-function showEpisodeMessage(message,error=false){
+/* EPISODE MESSAGE */
 
- const box=document.getElementById("episodeMessage");
+function showEpisodeMessage(
+ message,
+ error=false
+){
+
+ const box=
+  document.getElementById("episodeMessage");
 
  box.textContent=message;
- box.style.color=error?"#ff657f":"#8cffae";
+
+ box.style.color=
+  error?"#ff657f":"#8cffae";
+
 }
 
 
-async function loadEpisodes(seasonId,container){
+/* LOAD EPISODES */
+
+async function loadEpisodes(
+ seasonId,
+ container
+){
 
  try{
 
   const snapshot=
-   await db.collection("series")
-   .doc(currentSeriesId)
-   .collection("seasons")
-   .doc(seasonId)
-   .collection("episodes")
-   .get();
+   await db
+    .collection("series")
+    .doc(currentSeriesId)
+    .collection("seasons")
+    .doc(seasonId)
+    .collection("episodes")
+    .get();
+
 
   if(snapshot.empty){
 
@@ -1206,39 +2542,64 @@ async function loadEpisodes(seasonId,container){
    return;
   }
 
+
   const episodes=[];
 
+
   snapshot.forEach(doc=>{
-   episodes.push({id:doc.id,...doc.data()});
+
+   episodes.push({
+    id:doc.id,
+    ...doc.data()
+   });
+
   });
 
+
   episodes.sort((a,b)=>
-   Number(a.episodeNumber||0)-Number(b.episodeNumber||0)
+   Number(a.episodeNumber||0)-
+   Number(b.episodeNumber||0)
   );
+
 
   container.innerHTML="";
 
+
   episodes.forEach(ep=>{
 
-   const row=document.createElement("div");
+   const row=
+    document.createElement("div");
+
    row.className="episodeRow";
 
-   const name=document.createElement("div");
+
+   const name=
+    document.createElement("div");
+
    name.className="episodeName";
+
    name.textContent=
     `Episode ${ep.episodeNumber}: ${ep.title}`;
 
-   const del=document.createElement("button");
+
+   const del=
+    document.createElement("button");
+
    del.className="deleteBtn";
+
    del.textContent="Delete";
+
 
    del.onclick=async()=>{
 
-    if(!confirm(`Delete "${ep.title}"?`))return;
+    if(!confirm(`Delete "${ep.title}"?`))
+     return;
+
 
     try{
 
-     await db.collection("series")
+     await db
+      .collection("series")
       .doc(currentSeriesId)
       .collection("seasons")
       .doc(seasonId)
@@ -1246,14 +2607,19 @@ async function loadEpisodes(seasonId,container){
       .doc(ep.id)
       .delete();
 
+
      loadSeasons();
      updateStats();
 
+
     }catch(error){
+
      alert(error.message);
+
     }
 
    };
+
 
    row.appendChild(name);
    row.appendChild(del);
@@ -1262,12 +2628,16 @@ async function loadEpisodes(seasonId,container){
 
   });
 
+
  }catch(error){
 
   container.innerHTML=
-   `<div class="empty">${escapeHtml(error.message)}</div>`;
+   `<div class="empty">
+   ${escapeHtml(error.message)}
+   </div>`;
 
  }
+
 }
 
 
@@ -1277,66 +2647,102 @@ async function updateStats(){
 
  try{
 
-  const movies=await db.collection("movies").get();
-  const series=await db.collection("series").get();
+  const movies=
+   await db.collection("movies").get();
+
+  const series=
+   await db.collection("series").get();
+
 
   let episodeTotal=0;
+
 
   for(const s of series.docs){
 
    const seasons=
-    await db.collection("series")
-    .doc(s.id)
-    .collection("seasons")
-    .get();
+    await db
+     .collection("series")
+     .doc(s.id)
+     .collection("seasons")
+     .get();
+
 
    for(const season of seasons.docs){
 
     const episodes=
-     await db.collection("series")
-     .doc(s.id)
-     .collection("seasons")
-     .doc(season.id)
-     .collection("episodes")
-     .get();
+     await db
+      .collection("series")
+      .doc(s.id)
+      .collection("seasons")
+      .doc(season.id)
+      .collection("episodes")
+      .get();
+
 
     episodeTotal+=episodes.size;
 
    }
+
   }
 
-  document.getElementById("movieCount").textContent=movies.size;
-  document.getElementById("movieCount2").textContent=movies.size;
 
-  document.getElementById("seriesCount1").textContent=series.size;
-  document.getElementById("seriesCount2").textContent=series.size;
+  document.getElementById(
+   "movieCount"
+  ).textContent=movies.size;
 
-  document.getElementById("episodeCount1").textContent=episodeTotal;
-  document.getElementById("episodeCount2").textContent=episodeTotal;
+  document.getElementById(
+   "movieCount2"
+  ).textContent=movies.size;
+
+
+  document.getElementById(
+   "seriesCount1"
+  ).textContent=series.size;
+
+  document.getElementById(
+   "seriesCount2"
+  ).textContent=series.size;
+
+
+  document.getElementById(
+   "episodeCount1"
+  ).textContent=episodeTotal;
+
+  document.getElementById(
+   "episodeCount2"
+  ).textContent=episodeTotal;
+
 
  }catch(error){
 
-  console.log(error);
+  console.error(error);
 
  }
+
 }
 
 
 /* OTHER */
 
 function comingSoon(name){
- alert(name+" management will be added later.");
+
+ alert(
+  name+" management will be added later."
+ );
+
 }
 
+
+/* ESCAPE HTML */
 
 function escapeHtml(text){
 
  return String(text)
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
